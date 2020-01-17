@@ -14,7 +14,7 @@ namespace Shooter.Controllers
         private Animator _animator;
 
         [SerializeField]
-        private float _power = 0.01f;
+        private float _power = 0.1f;
         private float _currentEnergy = 1.0f;
         private float _reserveEnergy;
 

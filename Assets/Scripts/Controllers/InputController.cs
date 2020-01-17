@@ -46,7 +46,7 @@ namespace Shooter.Controllers
                 _chargingDuration = chargingDuration;
 
 
-                    _isActiveFlashlight = !_isActiveFlashlight;
+                _isActiveFlashlight = !_isActiveFlashlight;
                 var flashlightController = FlashlightController;
 
                 if ( _isActiveFlashlight ) {
