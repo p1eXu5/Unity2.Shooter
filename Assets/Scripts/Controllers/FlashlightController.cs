@@ -1,4 +1,4 @@
-﻿using System;
+﻿//using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -8,12 +8,16 @@ using UnityEngine;
 // ReSharper disable once CheckNamespace
 namespace Shooter.Controllers
 {
-    public class FlashlightController : BaseController
+    public class FlashlightController : Controller
     {
         private Light _light;
-        private float _timeout = 10;
-        private float _currTime;
-        private float _currReloadTime;
+        private Animator _animator;
+
+        [SerializeField]
+        private float _power = 0.01f;
+        private float _currentEnergy = 1.0f;
+        private float _reserveEnergy;
+
 
         public bool IsEnabled => _light?.enabled == true;
 
@@ -22,47 +26,67 @@ namespace Shooter.Controllers
 
         void Awake()
         {
-            _light = GameObject.Find( "Flashlight" ).GetComponentInChildren<Light>();
+            Debug.Log( "Flashlight awake" );
+            var flashlight = GameObject.Find( "Flashlight" );
+            if ( flashlight ) {
+                _light = flashlight.GetComponentInChildren< Light >();
+                _animator = flashlight.GetComponentInChildren< Animator >();
+            }
+
+            _animator.SetBool( "isOn", false );
+            _animator.SetFloat( "energy", _currentEnergy );
         }
 
         void Start()
         {
-            _setActiveFlashlight( false );
         }
 
         void Update()
         {
-            if (!IsEnabled) return;
-
             // light behavior starts here
+            var isOn = _animator.GetBool( "isOn" );
+
+            var battery = 0.0f;
+
+            if ( isOn && _currentEnergy > 0.0 ) {
+                _currentEnergy -= _power * Time.deltaTime;
+                _animator.SetFloat( "energy", _currentEnergy );
+
+                battery = _currentEnergy < 0.0f ? 0.0f : _currentEnergy;
+            }
+
+            var guiController = (GuiController)Director.ControllerMap[typeof( GuiController )];
+            guiController.Battery = battery;
         }
 
         #endregion
 
 
-        #region overrides
-
-        public override void On()
+        public void On()
         {
-            if ( IsEnabled ) return;
+            //if ( IsEnabled ) return;
 
-            _setActiveFlashlight( true );
+            //_setActiveFlashlight( true );
+            _animator.SetBool( "isOn", true );
         }
 
-        public override void Off()
+        public void Off()
         {
-            if ( !IsEnabled ) return;
+            //if ( !IsEnabled ) return;
 
-            _setActiveFlashlight( false );
+            //_setActiveFlashlight( false );
+            _animator.SetBool( "isOn", false );
         }
 
-
-        #endregion
+        public void ResetBattery()
+        {
+            _currentEnergy = 1.0f;
+        }
         
         
         private void _setActiveFlashlight( bool value )
         {
-            _light.enabled = value;
+            //_light.enabled = value;
         }
     }
 }

@@ -11,12 +11,16 @@ namespace Shooter
 {
     public sealed class Main : MonoBehaviour
     {
+        private ControllerDirector _controllerDirector;
+
         private static Main _instance;
 
         public static Main Instance => _instance == null ? (_instance = new Main()) : _instance;
 
         private GameObject _controllersGameObject;
         private InputController _inputController;
+
+        [SerializeField]
         private FlashlightController _flashlightController;
 
 
@@ -26,13 +30,17 @@ namespace Shooter
 
         #region activities
 
-        void Start()
+        void Awake()
         {
-            _instance = this;
+            _controllerDirector = new ControllerDirector( this.gameObject );
 
-            _controllersGameObject = new GameObject( "Controllers" );
-            _inputController = _controllersGameObject.AddComponent<InputController>();
-            _flashlightController = _controllersGameObject.AddComponent<FlashlightController>();
+            //_instance = this;
+
+            //_controllersGameObject = new GameObject( "Controllers" );
+
+            //if ( !_flashlightController ) {
+            //    _flashlightController = _controllersGameObject.AddComponent<FlashlightController>();
+            //}
         }
 
         #endregion

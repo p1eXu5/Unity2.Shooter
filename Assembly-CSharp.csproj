@@ -167,8 +167,11 @@
     <Compile Include="Assets\SampleScenes\Scripts\PlaceTargetWithMouse.cs" />
     <Compile Include="Assets\SampleScenes\Scripts\SlowMoButton.cs" />
     <Compile Include="Assets\Scripts\BaseObject.cs" />
-    <Compile Include="Assets\Scripts\Controllers\BaseController.cs" />
+    <Compile Include="Assets\Scripts\Contracts\IControllerDirector.cs" />
+    <Compile Include="Assets\Scripts\ControllerDirector.cs" />
+    <Compile Include="Assets\Scripts\Controllers\Controller.cs" />
     <Compile Include="Assets\Scripts\Controllers\FlashlightController.cs" />
+    <Compile Include="Assets\Scripts\Controllers\GuiController.cs" />
     <Compile Include="Assets\Scripts\Controllers\InputController.cs" />
     <Compile Include="Assets\Scripts\Main.cs" />
     <Compile Include="Assets\Scripts\Property.cs" />
