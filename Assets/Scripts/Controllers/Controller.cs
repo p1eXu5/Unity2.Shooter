@@ -12,5 +12,9 @@ namespace Shooter.Controllers
     public abstract class Controller : MonoBehaviour
     {
         public IControllerDirector Director { get; set; }
+
+        public Transform Transform => gameObject.transform;
+
+        public int ChildCount => Transform.childCount;
     }
 }
