@@ -5,12 +5,13 @@ using System.Security.Cryptography;
 using System.Text;
 using System.Threading.Tasks;
 using Shooter.Contracts;
+using Shooter.Models.Ammunition;
 using UnityEngine;
 
 // ReSharper disable once CheckNamespace
 namespace Shooter.Weapons
 {
-    public class Bullet : Ammunition
+    public class Bullet : AmmunitionBase
     {
         [SerializeField] private float _timeToDestruct = 10;
         [SerializeField] private float _damage = 20;

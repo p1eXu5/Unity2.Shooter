@@ -1,8 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Shooter.Models.Ammunition;
+using Shooter.Models.Weapons;
 using UnityEngine;
 
 // ReSharper disable once CheckNamespace
@@ -16,7 +17,7 @@ namespace Shooter.Weapons
 
         public  KeyCode Reload = KeyCode.R;
 
-        public override void Fire( Ammunition ammunition )
+        public void Fire( AmmunitionBase ammunition )
         {
             if ( _bulletCount > 0 && _CanFire && ammunition ) {
                 // animator
@@ -24,7 +25,7 @@ namespace Shooter.Weapons
                 // muzzle
                 _bulletCount--;
 
-                Bullet tempBullet = Instantiate( ammunition, _GunTransform.position, _GunTransform.rotation ) as Bullet;
+                Bullet tempBullet = Object.Instantiate( ammunition, _GunTransform.position, _GunTransform.rotation ) as Bullet;
 
                 if ( tempBullet != null ) {
                     tempBullet.Rigidbody.AddForce( _GunTransform.forward * _Force );

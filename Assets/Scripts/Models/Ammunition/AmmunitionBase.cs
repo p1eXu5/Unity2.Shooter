@@ -6,9 +6,9 @@ using System.Threading.Tasks;
 using Shooter;
 
 // ReSharper disable once CheckNamespace
-namespace Shooter.Weapons
+namespace Shooter.Models.Ammunition
 {
-    public class Ammunition : BaseObject
+    public class AmmunitionBase : BaseObject
     {
     }
 }

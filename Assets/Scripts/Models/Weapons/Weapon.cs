@@ -3,13 +3,14 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Shooter.Models.Ammunition;
 using UnityEngine;
 
 // ReSharper disable CheckNamespace
 
-namespace Shooter.Weapons
+namespace Shooter.Models.Weapons
 {
-    public abstract class Weapon : BaseObject
+    public class Weapon : IModel
     {
         [SerializeField] protected Transform _GunTransform;
         [SerializeField] protected float _Force = 500;
@@ -22,9 +23,6 @@ namespace Shooter.Weapons
 
         protected bool _CanFire = true;
 
-
-
-        public abstract void Fire( Ammunition ammunition );
 
 
         void Update()
