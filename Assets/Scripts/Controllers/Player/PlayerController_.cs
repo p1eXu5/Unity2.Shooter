@@ -11,10 +11,10 @@ using UnityEngine.EventSystems;
 
 namespace Shooter.Controllers
 {
-    public class PlayerController : ControllerBase< PlayerView, Player >
+    public class PlayerController_ : ControllerBase< PlayerView, Player >
     {
         private FlashlightController2 _flashlightController2;
-        private WeaponSwitcherController _weaponSwitcherController;
+        private WeaponInStoreController _weaponsInStoreController;
 
 
         // called right after been instantiated before View assignment
@@ -23,19 +23,19 @@ namespace Shooter.Controllers
 
         void Start()
         {
-            //var fview = View.GetComponentInChildren< FlashlightView >();
+            //var fview = View.GetComponentInChildren< FlashlightController >();
             //_flashlightController2 = gameObject.AddComponent<FlashlightController2>();
             //_flashlightController2.SetView( fview );
 
-            _flashlightController2 = _GetController< FlashlightView, FlashlightController2 >( true );
+            _flashlightController2 = _GetController< Views.FlashlightController, FlashlightController2 >( true );
 
 
 
             //var wview = View.GetComponentInChildren< WeaponSwitcherView >();
-            //_weaponSwitcherController = gameObject.AddComponent <WeaponSwitcherController >();
-            //_weaponSwitcherController.SetView( wview );
+            //_weaponsInStoreController = gameObject.AddComponent <WeaponInStoreController >();
+            //_weaponsInStoreController.SetView( wview );
 
-            _weaponSwitcherController = _GetController< WeaponSwitcherView, WeaponSwitcherController >( true );
+            _weaponsInStoreController = _GetController< WeaponSwitcherView, WeaponInStoreController >( true );
         }
 
         
@@ -51,13 +51,16 @@ namespace Shooter.Controllers
             }
 
             if ( Input.GetAxis( "Mouse ScrollWheel" ) > 0 ) {
-                _weaponSwitcherController.NextWeapon();
+                _weaponsInStoreController.NextWeapon();
             }
 
             if ( Input.GetAxis( "Mouse ScrollWheel" ) < 0 ) {
-                _weaponSwitcherController.PrevWeapon();
+                _weaponsInStoreController.PrevWeapon();
             }
 
+            if ( Input.GetButton( "Fire1" )) {
+                _weaponsInStoreController.FireSelected();
+            }
 
         }
 

@@ -17,25 +17,25 @@ namespace Shooter.Weapons
 
         public  KeyCode Reload = KeyCode.R;
 
-        public void Fire( AmmunitionBase ammunition )
-        {
-            if ( _bulletCount > 0 && _CanFire && ammunition ) {
-                // animator
-                // audio
-                // muzzle
-                _bulletCount--;
+        //public void Fire( AmmunitionBase ammunition )
+        //{
+        //    if ( _bulletCount > 0 && CanFire && ammunition ) {
+        //        // animator
+        //        // audio
+        //        // muzzle
+        //        _bulletCount--;
 
-                Bullet tempBullet = Object.Instantiate( ammunition, _GunTransform.position, _GunTransform.rotation ) as Bullet;
+        //        Bullet tempBullet = Object.Instantiate( ammunition, _GunTransform.position, _GunTransform.rotation ) as Bullet;
 
-                if ( tempBullet != null ) {
-                    tempBullet.Rigidbody.AddForce( _GunTransform.forward * _Force );
-                    tempBullet.Name = "Bullet";
+        //        if ( tempBullet != null ) {
+        //            tempBullet.Rigidbody.AddForce( _GunTransform.forward * _Force );
+        //            tempBullet.Name = "Bullet";
 
-                    _CanFire = false;
+        //            _CanFire = false;
 
-                    _RechargeTimer.Start( _RechargeTime );
-                }
-            }
-        }
+        //            _RechargeTimer.Start( RechargeTime );
+        //        }
+        //    }
+        //}
     }
 }

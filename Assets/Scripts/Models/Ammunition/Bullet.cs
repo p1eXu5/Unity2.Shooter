@@ -9,8 +9,9 @@ using Shooter.Models.Ammunition;
 using UnityEngine;
 
 // ReSharper disable once CheckNamespace
-namespace Shooter.Weapons
+namespace Shooter.Models.Ammunition
 {
+    [Serializable]
     public class Bullet : AmmunitionBase
     {
         [SerializeField] private float _timeToDestruct = 10;
@@ -19,29 +20,10 @@ namespace Shooter.Weapons
 
         private float _currentDamage;
 
-        protected override void Awake()
-        {
-            base.Awake();
+        
+        public float TimeToDestruct => _timeToDestruct;
+        public float Damage => _damage;
 
-            // 	self-destructing
-            Destroy( Instance, _timeToDestruct );
-
-            _currentDamage = _damage;
-            Rigidbody.mass = _mass;
-        }
-
-        private void OnCollisionEnter( Collision collision )
-        {
-            if ( collision.collider.tag == "Bullet" ) return;
-
-            _setDamage( collision.gameObject.GetComponent<ISetDamage>() );
-
-            Destroy( Instance );
-        }
-
-        private void _setDamage( ISetDamage obj )
-        {
-            obj?.ApplyDamage( _currentDamage );
-        }
+        public float Mass => _mass;
     }
 }

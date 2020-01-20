@@ -10162,6 +10162,42 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c388b0987ad908e4994dab016d992c60, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _weapons:
+  - RechargeTime: 500
+    Armo: 0
+    ammunition: []
+    _GunTransform: {fileID: 0}
+    _Force: 500
+    _ParticleSystem: {fileID: 0}
+    _HitParticle: {fileID: 0}
+  - RechargeTime: 500
+    Armo: 0
+    ammunition: []
+    _GunTransform: {fileID: 0}
+    _Force: 500
+    _ParticleSystem: {fileID: 0}
+    _HitParticle: {fileID: 0}
+  - RechargeTime: 500
+    Armo: 0
+    ammunition: []
+    _GunTransform: {fileID: 0}
+    _Force: 500
+    _ParticleSystem: {fileID: 0}
+    _HitParticle: {fileID: 0}
+  - RechargeTime: 500
+    Armo: 0
+    ammunition: []
+    _GunTransform: {fileID: 0}
+    _Force: 500
+    _ParticleSystem: {fileID: 0}
+    _HitParticle: {fileID: 0}
+  - RechargeTime: 500
+    Armo: 0
+    ammunition: []
+    _GunTransform: {fileID: 0}
+    _Force: 500
+    _ParticleSystem: {fileID: 0}
+    _HitParticle: {fileID: 0}
   _ammunitionList:
   - {fileID: 0}
   - {fileID: 0}
@@ -16014,6 +16050,58 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: 5e9e851c0e142814dac026a256ba2ac0, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 499986753, guid: 5e9e851c0e142814dac026a256ba2ac0, type: 3}
+      propertyPath: _model.ammunition.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 499986753, guid: 5e9e851c0e142814dac026a256ba2ac0, type: 3}
+      propertyPath: _model.Armo
+      value: 30
+      objectReference: {fileID: 0}
+    - target: {fileID: 499986753, guid: 5e9e851c0e142814dac026a256ba2ac0, type: 3}
+      propertyPath: _model.RechargeTime
+      value: 0.05
+      objectReference: {fileID: 0}
+    - target: {fileID: 499986753, guid: 5e9e851c0e142814dac026a256ba2ac0, type: 3}
+      propertyPath: _model.ammunition.Array.data[0]
+      value: 
+      objectReference: {fileID: 8156080077677902398, guid: 5c863f94413a7954baeada77bfae9a8d,
+        type: 3}
+    - target: {fileID: 499986753, guid: 5e9e851c0e142814dac026a256ba2ac0, type: 3}
+      propertyPath: _model._Force
+      value: 10000
+      objectReference: {fileID: 0}
+    - target: {fileID: 1964802629, guid: 5e9e851c0e142814dac026a256ba2ac0, type: 3}
+      propertyPath: _model.ammunition.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1964802629, guid: 5e9e851c0e142814dac026a256ba2ac0, type: 3}
+      propertyPath: _model.ammunition.Array.data[0]
+      value: 
+      objectReference: {fileID: 8156080077677902398, guid: 5c863f94413a7954baeada77bfae9a8d,
+        type: 3}
+    - target: {fileID: 1964802629, guid: 5e9e851c0e142814dac026a256ba2ac0, type: 3}
+      propertyPath: _model.Armo
+      value: 500
+      objectReference: {fileID: 0}
+    - target: {fileID: 1964802629, guid: 5e9e851c0e142814dac026a256ba2ac0, type: 3}
+      propertyPath: _model.RechargeTime
+      value: 0.1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1964802629, guid: 5e9e851c0e142814dac026a256ba2ac0, type: 3}
+      propertyPath: _model._Force
+      value: 10000
+      objectReference: {fileID: 0}
+    - target: {fileID: 5327545388511988185, guid: 5e9e851c0e142814dac026a256ba2ac0,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 9178434640528990521, guid: 5e9e851c0e142814dac026a256ba2ac0,
+        type: 3}
+      propertyPath: m_Enabled
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []

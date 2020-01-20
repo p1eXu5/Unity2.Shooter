@@ -1,4 +1,6 @@
 ﻿//using System;
+
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -8,7 +10,8 @@ using UnityEngine;
 // ReSharper disable once CheckNamespace
 namespace Shooter.Controllers
 {
-    public class FlashlightController : Controller
+    [Obsolete]
+    public class FlashlightController_ : Controller
     {
         private Light _light;
         private Animator _animator;

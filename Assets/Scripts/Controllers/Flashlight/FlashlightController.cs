@@ -3,24 +3,21 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Shooter.Controllers;
 using Shooter.Models;
-using Shooter.Views;
 using UnityEngine;
-using UnityEngine.EventSystems;
-using UnityEngine.Scripting;
 
-namespace Shooter.Controllers
+namespace Shooter.Views
 {
-    public interface IFlashlightMessageTarget : IEventSystemHandler
-    {
-        void SwitchOn();
-        void SwitchOff();
 
-        void StartRecharge();
-    }
-
-    public class FlashlightController2 : ControllerBase< Views.FlashlightController, Flashlight >
+    [RequireComponent(typeof(Animator))]
+    public class FlashlightController : ViewBase< Flashlight >
     {
+        private Animator _animator;
+
+        // ReSharper disable once ConvertToNullCoalescingCompoundAssignment
+        public Animator Animator => _animator ?? (_animator = GetComponent< Animator >() );
+
         private bool _isCharging;
         private float _chargingTime;
 
@@ -29,24 +26,24 @@ namespace Shooter.Controllers
             get => Model.Energy;
             set {
                 Model.Energy =  value < 0.0f ? 0.0f : value;
-                View.Animator.SetFloat( "energy", Model.Energy );
+                Animator.SetFloat( "energy", Model.Energy );
             }
         }
 
         public void Toggle()
         {
-            if (View.Animator.GetBool("isOn")) {
-                View.Animator.SetBool("isOn", false);
+            if (Animator.GetBool("isOn")) {
+                Animator.SetBool("isOn", false);
             }
             else {
-                View.Animator.SetBool("isOn", true);
+                Animator.SetBool("isOn", true);
             }
             
         }
 
         public void SwitchOff()
         {
-            View.Animator.SetBool("isOn", false);
+            Animator.SetBool("isOn", false);
         }
 
         public void StartRecharge()
@@ -86,10 +83,9 @@ namespace Shooter.Controllers
                 }
             }
 
-            if ( View.Animator.GetBool( "isOn" ) ) {
+            if ( Animator.GetBool( "isOn" ) ) {
                 Energy = Model.Energy - Model.Power * Time.deltaTime;
             }
         }
-
     }
 }

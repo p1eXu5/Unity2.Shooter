@@ -3,13 +3,14 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using AssemblyCSharp.Assets.Scripts;
 using Shooter.Controllers;
 using Shooter.Models;
 using Shooter.Views;
 
 namespace Shooter.Controllers
 {
-    public class WeaponSwitcherController : ControllerBase< WeaponSwitcherView >
+    public class WeaponInStoreController : ControllerBase< WeaponSwitcherView >
     {
         
         private int _selectedWeapon;
@@ -79,6 +80,9 @@ namespace Shooter.Controllers
             _selectedWeaponController.Enable();
         }
 
-
+        public void FireSelected( Fire fire = Fire.PrimaryFire )
+        {
+            _selectedWeaponController.Fire( fire );
+        }
     }
 }

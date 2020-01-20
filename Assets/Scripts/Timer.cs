@@ -1,4 +1,5 @@
 ﻿using System;
+using TMPro;
 
 // ReSharper disable once CheckNamespace
 namespace Shooter
@@ -8,35 +9,55 @@ namespace Shooter
     /// </summary>
     public sealed class Timer
     {
-        DateTime _start;
-        float _elapsed = -1;
-        TimeSpan _duration;
+        private DateTime _start = DateTime.Now;
+        private float _lastInterval = -1;
+        private float _runningInterval = -1;
+        private TimeSpan _elapsed;
 
-        public void Start( float elapsed )
+        public Timer()
+        { }
+
+        public Timer( float runningInterval )
         {
-            _elapsed = elapsed;
+            _lastInterval = runningInterval;
+        }
+
+
+        public bool IsStopped => _runningInterval < 0.0f;
+
+
+        public void Start( float duration )
+        {
             _start = DateTime.Now;
-            _duration = TimeSpan.Zero;
+            _runningInterval = duration;
+            _lastInterval = duration;
+        }
+
+        public void Restart()
+        {
+            if ( _lastInterval <= 0 ) {
+                throw new InvalidOperationException( "You must set runningInterval through Start method." );
+            }
+
+            _start = DateTime.Now;
+            _runningInterval = _lastInterval;
         }
 
         public void Update()
         {
-            if ( _elapsed > 0 ) {
-                _duration = DateTime.Now - _start;
+            if ( _runningInterval > 0 ) {
+                _elapsed = DateTime.Now - _start;
 
-                if ( _duration.TotalSeconds > _elapsed ) {
-                    _elapsed = 0.0f;
+                if ( _elapsed.TotalSeconds > _runningInterval ) {
+                    _runningInterval = 0.0f;
                     // for event check
                 }
             }
-            else if ( _elapsed.Equals( 0.0f ) ) {
-                _elapsed = -1;
+            else if ( _runningInterval.Equals( 0.0f ) ) {
+                _runningInterval = -1;
             }
         }
 
-        public bool IsEvent()
-        {
-            return _elapsed == 0;
-        }
+        public bool IsDingDong => _runningInterval == 0;
     }
 }

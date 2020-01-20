@@ -3,12 +3,12 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using Shooter;
 
-// ReSharper disable once CheckNamespace
-namespace Shooter.Models.Ammunition
+namespace Shooter
 {
-    public class AmmunitionBase : IModel
+    public enum Fire
     {
+        PrimaryFire = 0,
+        SecondaryFire = 1
     }
 }
