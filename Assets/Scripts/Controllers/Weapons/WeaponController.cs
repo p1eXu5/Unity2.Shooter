@@ -4,18 +4,24 @@ using UnityEngine;
 
 namespace Shooter.Controllers
 {
-    public class WeaponController : ControllerBase< WeaponView, Weapon >
+    public class WeaponController : ControllerBase< Weapon >
     {
         private float _delay;
         private Timer _rechargeTimer;
         
         private Transform _gunElement;
         
+        protected override void Awake()
+        {
+            base.Awake();
+
+            _rechargeTimer = new Timer( Model.RechargeTime );
+            _delay = Model.RechargeTime;
+            _gunElement = Transform.Find( "GunT" );
+        }
+
         void Start()
         {
-            _delay = Model.RechargeTime;
-            _rechargeTimer = new Timer( Model.RechargeTime );
-            _gunElement = View.Transform.Find( "GunT" );
         }
         
         public bool CanFire() => Model.Armo > 0 && _rechargeTimer.IsStopped;
@@ -28,7 +34,7 @@ namespace Shooter.Controllers
 
             if ( bullet != null ) 
             {
-                var newBullet = Instantiate( _getAmmunition(fire), _gunElement.transform.position, View.Transform.rotation );
+                var newBullet = Instantiate( bullet, _gunElement.transform.position, Transform.rotation );
             
                 if ( newBullet != null ) {
 

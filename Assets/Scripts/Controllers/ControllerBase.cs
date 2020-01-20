@@ -3,54 +3,33 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Shooter.Controllers;
 using Shooter.Models;
-using Shooter.Views;
+using UnityEditor.IMGUI.Controls;
 using UnityEngine;
 
-namespace Shooter.Controllers
+namespace Shooter.Views
 {
-
-
-
-    public class ControllerBase<TView> : MonoBehaviour
-        where TView : ViewBase
+    public class ControllerBase< TModel > : ControllerBase
+        where TModel : IModel, new()
     {
-        public TView View { get; private set; }
+        [SerializeField]
+        private TModel _model;
 
+        public TModel Model => _model;
+    }
 
-        public void SetView( TView view )
-        {
-            View = view;
-        }
+    public class ControllerBase : BaseObject
+    {
 
         public virtual void Enable()
         {
-            View.Instance.SetActive( true );
+            gameObject.SetActive( true );
         }
 
         public virtual void Disable()
         {
-            View.Instance.SetActive( false );
+            gameObject.SetActive( false );
         }
-
-        protected TC _GetController<TV, TC>( bool includeInactive = false )
-            where TC : ControllerBase<TV>
-            where TV : ViewBase
-        {
-            TV view = View.GetComponentInChildren<TV>( includeInactive );
-            TC controller = gameObject.AddComponent<TC>();
-            controller.SetView( view );
-
-            return controller;
-        }
-    }
-
-
-
-    public class ControllerBase<TView, TModel > : ControllerBase<TView>
-        where TModel : IModel, new()
-        where TView : ViewBase< TModel >
-    {
-        public TModel Model => View.Model;
     }
 }

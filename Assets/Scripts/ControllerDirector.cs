@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Shooter.Controllers;
+using Shooter.Views;
 using UnityEngine;
 
 namespace Shooter
@@ -16,11 +17,11 @@ namespace Shooter
         public ControllerDirector( GameObject mainContainer )
         {
             _map = new Dictionary< Type, Controller > {
-                [typeof(InputController)] = mainContainer.GetComponent< InputController >() 
-                                            ?? mainContainer.AddComponent< InputController >(),
+                //[typeof(InputController)] = mainContainer.GetComponent< InputController >() 
+                //                            ?? mainContainer.AddComponent< InputController >(),
 
-                [typeof(FlashlightController)] = mainContainer.GetComponent< FlashlightController >() 
-                                                 ?? mainContainer.AddComponent< FlashlightController >(),
+                //[typeof(FlashlightController)] = mainContainer.GetComponent< FlashlightController >() 
+                //                                 ?? mainContainer.AddComponent< FlashlightController >(),
 
                 [typeof(GuiController)] = mainContainer.GetComponent< GuiController >() 
                                           ?? mainContainer.AddComponent< GuiController >()

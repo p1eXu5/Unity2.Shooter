@@ -11,7 +11,7 @@ namespace Shooter.Views
 {
 
     [RequireComponent(typeof(Animator))]
-    public class FlashlightController : ViewBase< Flashlight >
+    public class FlashlightController : ControllerBase< Flashlight >
     {
         private Animator _animator;
 

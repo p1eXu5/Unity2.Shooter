@@ -10,7 +10,7 @@ using Shooter.Views;
 
 namespace Shooter.Controllers
 {
-    public class WeaponInStoreController : ControllerBase< WeaponSwitcherView >
+    public class WeaponInStoreController : ControllerBase
     {
         
         private int _selectedWeapon;
@@ -24,11 +24,8 @@ namespace Shooter.Controllers
 
         void Start()
         {
-            _weaponControllers = View.GetComponentsInChildren< WeaponView >( true ).Select( v => {
-                var contr = gameObject.AddComponent<WeaponController>();
-                contr.SetView( v );
-                contr.Disable();
-                return contr;
+            _weaponControllers = GetComponentsInChildren< WeaponController >( true ).Select( c => {
+                c.Disable(); return c;
             } ).ToArray();
 
             _selectedWeaponController.Enable();

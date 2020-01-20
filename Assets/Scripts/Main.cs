@@ -38,10 +38,9 @@ namespace Shooter
         {
             //_controllerDirector = new ControllerDirector( this.gameObject );
             if ( !_playerController ) {
-                var views = FindObjectsOfType< PlayerView >();
+                var views = FindObjectsOfType< PlayerController >();
                 if ( views.Any() ) {
-                    _playerController = gameObject.AddComponent< PlayerController >();
-                    _playerController.SetView( views.First() );
+                    _playerController = views[0];
                 }
                 else {
                     Debug.Log( "no PlayerView's in scene." );

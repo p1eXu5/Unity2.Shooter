@@ -9,7 +9,7 @@ using UnityEngine;
 
 namespace Shooter.Views
 {
-    public class BulletController : ViewBase< Bullet >
+    public class BulletController : ControllerBase< Bullet >
     {
         private float _currentDamage;
         protected override void Awake()

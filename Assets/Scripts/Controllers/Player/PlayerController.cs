@@ -11,7 +11,7 @@ using UnityEngine.EventSystems;
 
 namespace Shooter.Controllers
 {
-    public class PlayerController : ViewBase< Player >
+    public class PlayerController : ControllerBase< Player >
     {
         private FlashlightController _flashlightController;
         private WeaponInStoreController _weaponsInStoreController;
@@ -19,23 +19,14 @@ namespace Shooter.Controllers
 
         // called right after been instantiated before View assignment
         void Awake()
-        { }
+        {
+            _flashlightController = GetComponentInChildren< FlashlightController >();
+            _weaponsInStoreController = GetComponentInChildren< WeaponInStoreController >();
+        }
 
         void Start()
         {
-            //var fview = View.GetComponentInChildren< FlashlightController >();
-            //_flashlightController = gameObject.AddComponent<FlashlightController2>();
-            //_flashlightController.SetView( fview );
 
-            _flashlightController = GetComponent< FlashlightController >();
-
-
-
-            //var wview = View.GetComponentInChildren< WeaponSwitcherView >();
-            //_weaponsInStoreController = gameObject.AddComponent <WeaponInStoreController >();
-            //_weaponsInStoreController.SetView( wview );
-
-            _weaponsInStoreController = _GetController< WeaponSwitcherView, WeaponInStoreController >( true );
         }
 
         
