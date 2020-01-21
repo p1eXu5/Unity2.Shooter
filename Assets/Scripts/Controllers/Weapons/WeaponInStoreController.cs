@@ -45,6 +45,7 @@ namespace Shooter.Controllers
         {
             if ( _selectedWeapon == 0 ) {
                 _changeWeapon( Count - 1 );
+                return;
             }
 
             _changeWeapon( _selectedWeapon - 1 );
