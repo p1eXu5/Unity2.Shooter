@@ -175,6 +175,7 @@
     <Compile Include="Assets\Scripts\Controllers\ControllerBase.cs" />
     <Compile Include="Assets\Scripts\Controllers\Flashlight\FlashlightController.cs" />
     <Compile Include="Assets\Scripts\Controllers\Gui\GuiController.cs" />
+    <Compile Include="Assets\Scripts\Controllers\Heroes\EnemyController.cs" />
     <Compile Include="Assets\Scripts\Controllers\Player\PlayerController.cs" />
     <Compile Include="Assets\Scripts\Controllers\Weapons\ChangeWeapon.cs" />
     <Compile Include="Assets\Scripts\Controllers\Weapons\WeaponController.cs" />
@@ -186,6 +187,8 @@
     <Compile Include="Assets\Scripts\Models\Ammunition\Bullet.cs" />
     <Compile Include="Assets\Scripts\Models\Flashlight.cs" />
     <Compile Include="Assets\Scripts\Models\Heroes\Box.cs" />
+    <Compile Include="Assets\Scripts\Models\Heroes\Enemy.cs" />
+    <Compile Include="Assets\Scripts\Models\Heroes\SciFiWarrior.cs" />
     <Compile Include="Assets\Scripts\Models\IModel.cs" />
     <Compile Include="Assets\Scripts\Models\Player.cs" />
     <Compile Include="Assets\Scripts\Models\Weapons\Gun.cs" />

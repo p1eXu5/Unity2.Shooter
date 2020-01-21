@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using AssemblyCSharp.Assets.Scripts.Controllers.Heroes;
 using Shooter.Contracts;
 using Shooter.Heroes;
 using Shooter.Models.Ammunition;
@@ -26,9 +27,12 @@ namespace Shooter.Views
 
         private void OnCollisionEnter( Collision collision )
         {
-            if ( !collision.gameObject.GetComponent< Box >() ) return;
+            var comp = collision.gameObject.GetComponent< ISetDamage >();
+            if ( comp == null ) {
+                comp = collision.gameObject.GetComponentInParent< ISetDamage >();
+            }
 
-            _setDamage( collision.gameObject.GetComponent< ISetDamage >() );
+            _setDamage( comp );
 
             Destroy( Instance );
         }
