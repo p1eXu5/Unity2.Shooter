@@ -21,6 +21,10 @@ namespace Shooter.Views
         private bool _isCharging;
         private float _chargingTime;
 
+
+        private Light _Light => gameObject.GetComponentInChildren<Light>();
+
+
         public float Energy
         {
             get => Model.Energy;

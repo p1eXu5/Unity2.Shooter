@@ -18,8 +18,10 @@ namespace Shooter.Controllers
 
 
         // called right after been instantiated before View assignment
-        void Awake()
+        protected override void Awake()
         {
+            base.Awake();
+
             _flashlightController = GetComponentInChildren< FlashlightController >();
             _weaponsInStoreController = GetComponentInChildren< WeaponInStoreController >();
         }

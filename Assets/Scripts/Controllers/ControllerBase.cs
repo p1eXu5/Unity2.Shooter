@@ -19,6 +19,7 @@ namespace Shooter.Views
         public TModel Model => _model;
     }
 
+
     public class ControllerBase : BaseObject
     {
 
