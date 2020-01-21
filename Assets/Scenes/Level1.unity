@@ -3509,7 +3509,7 @@ MonoBehaviour:
     ammunition:
     - {fileID: 8156080077677902398, guid: 5c863f94413a7954baeada77bfae9a8d, type: 3}
     _GunTransform: {fileID: 0}
-    _Force: 5000
+    _Force: 80
     _ParticleSystem: {fileID: 0}
     _HitParticle: {fileID: 0}
 --- !u!4 &418827735 stripped
@@ -7311,6 +7311,32 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 94839c219e848e44ca409c12b69fb396, type: 3}
+--- !u!1 &858333259 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 3312505920537024693, guid: 5e9e851c0e142814dac026a256ba2ac0,
+    type: 3}
+  m_PrefabInstance: {fileID: 1872652007}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &858333263
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 858333259}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 486a2e577ed605c40b7c1dc5132b83fb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _model:
+    RechargeTime: 1
+    Armo: 0
+    ammunition: []
+    _GunTransform: {fileID: 0}
+    _Force: 500
+    _ParticleSystem: {fileID: 0}
+    _HitParticle: {fileID: 0}
 --- !u!4 &858967032 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 400000, guid: d91a395a2c7183e4c893bfa8ba15e779,
@@ -14976,7 +15002,7 @@ MonoBehaviour:
     ammunition:
     - {fileID: 8156080077677902398, guid: 5c863f94413a7954baeada77bfae9a8d, type: 3}
     _GunTransform: {fileID: 0}
-    _Force: 5000
+    _Force: 50
     _ParticleSystem: {fileID: 0}
     _HitParticle: {fileID: 0}
 --- !u!1001 &1735534067
@@ -16193,6 +16219,11 @@ PrefabInstance:
     - target: {fileID: 1964802629, guid: 5e9e851c0e142814dac026a256ba2ac0, type: 3}
       propertyPath: _model._Force
       value: 10000
+      objectReference: {fileID: 0}
+    - target: {fileID: 3882092506172882024, guid: 5e9e851c0e142814dac026a256ba2ac0,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5327545388511988185, guid: 5e9e851c0e142814dac026a256ba2ac0,
         type: 3}
@@ -18585,6 +18616,31 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6560257337646813965, guid: 5c863f94413a7954baeada77bfae9a8d,
+        type: 3}
+      propertyPath: m_Height
+      value: 0.02151561
+      objectReference: {fileID: 0}
+    - target: {fileID: 6560257337646813965, guid: 5c863f94413a7954baeada77bfae9a8d,
+        type: 3}
+      propertyPath: m_Center.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6560257337646813965, guid: 5c863f94413a7954baeada77bfae9a8d,
+        type: 3}
+      propertyPath: m_Center.y
+      value: 9.313226e-10
+      objectReference: {fileID: 0}
+    - target: {fileID: 6560257337646813965, guid: 5c863f94413a7954baeada77bfae9a8d,
+        type: 3}
+      propertyPath: m_Radius
+      value: 0.0041183857
+      objectReference: {fileID: 0}
+    - target: {fileID: 6560257337646813965, guid: 5c863f94413a7954baeada77bfae9a8d,
+        type: 3}
+      propertyPath: m_Direction
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 6843027764088867309, guid: 5c863f94413a7954baeada77bfae9a8d,
         type: 3}

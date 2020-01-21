@@ -34,13 +34,13 @@ namespace Shooter.Controllers
 
             if ( bullet != null ) 
             {
-                var newBullet = Instantiate( bullet, _gunElement.transform.position, Transform.rotation );
+                var res = Instantiate( bullet, _gunElement.transform.position, Transform.rotation ).TryGetComponent(typeof(Rigidbody), out var newBullet);
             
-                if ( newBullet != null ) {
+                if ( res ) {
 
                     Model.Armo--;
-                    newBullet.Rigidbody.AddForce( _gunElement.forward * Model.Force );
-                    newBullet.Name = "Bullet";
+                    ((Rigidbody)newBullet).AddForce( _gunElement.forward * Model.Force );
+                    newBullet.gameObject.name = "Bullet";
 
                     _rechargeTimer.Restart();
                 }
@@ -57,7 +57,7 @@ namespace Shooter.Controllers
         private BulletController _getAmmunition( Fire fire)
         {
             var ind = (int)fire;
-            if ( Model.ammunition == null || Model.ammunition.Length == 0 || ind >= Model.ammunition.Length ) {
+            if ( Model.ammunition == null || Model.ammunition.Length == 0 || ind < 0 || ind >= Model.ammunition.Length ) {
                 return null;
             }
             

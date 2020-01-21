@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Shooter.Contracts;
+using Shooter.Heroes;
 using Shooter.Models.Ammunition;
 using UnityEngine;
 
@@ -25,7 +26,7 @@ namespace Shooter.Views
 
         private void OnCollisionEnter( Collision collision )
         {
-            if ( collision.collider.tag == "Bullet" ) return;
+            if ( !collision.gameObject.GetComponent< Box >() ) return;
 
             _setDamage( collision.gameObject.GetComponent< ISetDamage >() );
 
