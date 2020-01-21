@@ -28,7 +28,7 @@ namespace Shooter.Weapons
         //        Bullet tempBullet = Object.Instantiate( ammunition, _GunTransform.position, _GunTransform.rotation ) as Bullet;
 
         //        if ( tempBullet != null ) {
-        //            tempBullet.Rigidbody.AddForce( _GunTransform.forward * _Force );
+        //            tempBullet.Rigidbody.AddForce( _GunTransform.forward * _force );
         //            tempBullet.Name = "Bullet";
 
         //            _CanFire = false;

@@ -10166,38 +10166,43 @@ MonoBehaviour:
   - RechargeTime: 500
     Armo: 0
     ammunition: []
-    _GunTransform: {fileID: 0}
-    _Force: 500
-    _ParticleSystem: {fileID: 0}
-    _HitParticle: {fileID: 0}
+    _gunTransform: {fileID: 0}
+    _force: 500
+    _particleSystem: {fileID: 0}
+    _hitParticle: {fileID: 0}
+    _damage: 0
   - RechargeTime: 500
     Armo: 0
     ammunition: []
-    _GunTransform: {fileID: 0}
-    _Force: 500
-    _ParticleSystem: {fileID: 0}
-    _HitParticle: {fileID: 0}
+    _gunTransform: {fileID: 0}
+    _force: 500
+    _particleSystem: {fileID: 0}
+    _hitParticle: {fileID: 0}
+    _damage: 0
   - RechargeTime: 500
     Armo: 0
     ammunition: []
-    _GunTransform: {fileID: 0}
-    _Force: 500
-    _ParticleSystem: {fileID: 0}
-    _HitParticle: {fileID: 0}
+    _gunTransform: {fileID: 0}
+    _force: 500
+    _particleSystem: {fileID: 0}
+    _hitParticle: {fileID: 0}
+    _damage: 0
   - RechargeTime: 500
     Armo: 0
     ammunition: []
-    _GunTransform: {fileID: 0}
-    _Force: 500
-    _ParticleSystem: {fileID: 0}
-    _HitParticle: {fileID: 0}
+    _gunTransform: {fileID: 0}
+    _force: 500
+    _particleSystem: {fileID: 0}
+    _hitParticle: {fileID: 0}
+    _damage: 0
   - RechargeTime: 500
     Armo: 0
     ammunition: []
-    _GunTransform: {fileID: 0}
-    _Force: 500
-    _ParticleSystem: {fileID: 0}
-    _HitParticle: {fileID: 0}
+    _gunTransform: {fileID: 0}
+    _force: 500
+    _particleSystem: {fileID: 0}
+    _hitParticle: {fileID: 0}
+    _damage: 0
 --- !u!1001 &1129624675
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -18542,7 +18547,7 @@ PrefabInstance:
     - target: {fileID: 4641222848821487406, guid: b4b799acbbf0b0d44a07ac92259567f0,
         type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5881090418176082934, guid: b4b799acbbf0b0d44a07ac92259567f0,
         type: 3}

@@ -30,21 +30,27 @@ namespace Shooter.Controllers
         {
             if (!CanFire() ) return;
 
+            if (_Fire( fire ) ) _rechargeTimer.Restart();;
+        }
+
+        protected virtual bool _Fire( Fire fire )
+        {
             BulletController bullet = _getAmmunition( fire );
 
-            if ( bullet != null ) 
-            {
-                var res = Instantiate( bullet, _gunElement.transform.position, Transform.rotation ).TryGetComponent(typeof(Rigidbody), out var newBullet);
-            
-                if ( res ) {
+            if ( bullet != null ) {
+                var res = Instantiate( bullet, _gunElement.transform.position, Transform.rotation )
+                    .TryGetComponent( typeof( Rigidbody ), out var newBullet );
 
+                if ( res ) {
                     Model.Armo--;
-                    ((Rigidbody)newBullet).AddForce( _gunElement.forward * Model.Force );
+                    (( Rigidbody )newBullet).AddForce( _gunElement.forward * Model.Force );
                     newBullet.gameObject.name = "Bullet";
 
-                    _rechargeTimer.Restart();
+                    return true;
                 }
             }
+
+            return false;
         }
 
         void Update()

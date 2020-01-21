@@ -21,12 +21,17 @@ namespace Shooter.Models.Weapons
 
         public BulletController[] ammunition;
 
-        [SerializeField] protected Transform _GunTransform;
-        [SerializeField] protected float _Force = 500;
+        [SerializeField] protected Transform _gunTransform;
+        [SerializeField] protected float _force = 500;
 
-        [SerializeField] protected ParticleSystem _ParticleSystem;
-        [SerializeField] protected GameObject _HitParticle;
+        [SerializeField] protected ParticleSystem _particleSystem;
+        [SerializeField] protected GameObject _hitParticle;
 
-        public float Force => _Force;
+        [SerializeField] protected float _damage;
+
+        public float Force => _force;
+        public float Damage => _damage;
+
+        public GameObject HitParticle => _hitParticle;
     }
 }
