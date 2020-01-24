@@ -9,7 +9,7 @@ using UnityEngine.UI;
 
 namespace Shooter.Controllers
 {
-    public class GuiController : Controller
+    public class GuiController : ControllerBase
     {
         [SerializeField]
         private Image _image;
@@ -18,12 +18,5 @@ namespace Shooter.Controllers
             get => _image.fillAmount; 
             set => _image.fillAmount = value;
         }
-
-        void Awake()
-        {
-
-        }
-
-
     }
 }

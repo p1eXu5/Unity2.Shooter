@@ -3,13 +3,13 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using AssemblyCSharp.Assets.Scripts.Controllers.Heroes;
 using Shooter.Contracts;
+using Shooter.Controllers;
 using Shooter.Heroes;
 using Shooter.Models.Ammunition;
 using UnityEngine;
 
-namespace Shooter.Views
+namespace Shooter.Controllers.Ammunition
 {
     public class BulletController : ControllerBase< Bullet >
     {

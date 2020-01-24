@@ -10,10 +10,10 @@ namespace Shooter
 {
     public class ObjectManager : MonoBehaviour
     {
-        [SerializeField] private Weapon[] _weapons = new Weapon[5];
+        [SerializeField] private BallisticWeapon[] _weapons = new BallisticWeapon[5];
         [SerializeField] private AmmunitionBase[] _ammunitionList = new AmmunitionBase[5];
 
-        public Weapon[] Weapons => _weapons;
+        public BallisticWeapon[] Weapons => _weapons;
         public AmmunitionBase[] AmmunitionList => _ammunitionList;
     }
 

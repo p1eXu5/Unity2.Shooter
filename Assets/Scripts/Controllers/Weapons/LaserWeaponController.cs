@@ -11,7 +11,7 @@ using UnityEngine;
 
 namespace Shooter.Controllers.Weapons
 {
-    public class LaserWeaponController : WeaponControllerBase< LaserWeapon >
+    public class LaserWeaponController : WeaponController< LaserWeapon >
     {
         public ParticleSystem _particleSystem;
         public GameObject _hitParticle;

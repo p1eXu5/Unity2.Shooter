@@ -1,14 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Shooter.Contracts;
+﻿using Shooter.Contracts;
 using Shooter.Models.Heroes;
-using Shooter.Views;
 using UnityEngine;
 
-namespace AssemblyCSharp.Assets.Scripts.Controllers.Heroes
+namespace Shooter.Controllers.Heroes
 {
     public class EnemyController : ControllerBase< Enemy >, ISetDamage
     {

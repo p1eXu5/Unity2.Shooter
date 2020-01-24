@@ -20,19 +20,23 @@ namespace Shooter.Controllers
         
         private int _selectedWeapon;
 
-        private Transform[] _weaponControllers;
+        private IWeaponControllerMessageTarget[] _weaponControllers;
 
-        private Transform _SelectedWeaponController => _weaponControllers[_selectedWeapon];
+        private IWeaponControllerMessageTarget _SelectedWeaponController => _weaponControllers[_selectedWeapon];
 
 
         public int Count => _weaponControllers.Length;
 
         void Start()
         {
-            _weaponControllers = GetChildrenTransforms().ToArray();
-            BroadcastMessage( Messages.WeaponController.ShowAway );
+            _weaponControllers = GetChildrenTransforms<IWeaponControllerMessageTarget>()
+                .Select( c => { c.ShowAway(); return c; } )
+                .ToArray();
 
-            _SelectedWeaponController.BroadcastMessage( Messages.WeaponController.PullOut );
+            //BroadcastMessage( Messages.WeaponController.ShowAway );
+
+            var sw = _SelectedWeaponController;
+            _SelectedWeaponController.PullOut();
         }
 
         public void NextWeapon()
@@ -77,14 +81,14 @@ namespace Shooter.Controllers
 
         private void _ChangeWeapon( int nextIndex )
         {
-            _SelectedWeaponController.BroadcastMessage( Messages.WeaponController.ShowAway);
+            _SelectedWeaponController.ShowAway();
             _selectedWeapon = nextIndex;
-            _SelectedWeaponController.BroadcastMessage( Messages.WeaponController.PullOut );
+            _SelectedWeaponController.PullOut();
         }
 
         public void FireSelected( Fire fire = Fire.PrimaryFire )
         {
-            _SelectedWeaponController.BroadcastMessage( Messages.WeaponController.Fire, fire );
+            _SelectedWeaponController.Fire( fire );
         }
     }
 }

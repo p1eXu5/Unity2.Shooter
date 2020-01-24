@@ -8,7 +8,7 @@ using UnityEngine;
 
 namespace Shooter.Models.Weapons
 {
-    public class LaserWeapon : WeaponBase
+    public class LaserWeapon : Weapon
     {
         
 

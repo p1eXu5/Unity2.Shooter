@@ -9,7 +9,7 @@ using UnityEngine;
 // ReSharper disable once CheckNamespace
 namespace Shooter.Weapons
 {
-    public class Gun : Weapon
+    public class Gun : BallisticWeapon
     {
         [SerializeField] private int _bulletCount = 30;
         [SerializeField] private float _shootDistance = 1000f;

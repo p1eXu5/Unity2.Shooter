@@ -167,10 +167,8 @@
     <Compile Include="Assets\SampleScenes\Scripts\PlaceTargetWithMouse.cs" />
     <Compile Include="Assets\SampleScenes\Scripts\SlowMoButton.cs" />
     <Compile Include="Assets\Scripts\BaseObject.cs" />
-    <Compile Include="Assets\Scripts\Contracts\IControllerDirector.cs" />
     <Compile Include="Assets\Scripts\Contracts\ISetDamage.cs" />
     <Compile Include="Assets\Scripts\Controllers\Ammunition\BulletController.cs" />
-    <Compile Include="Assets\Scripts\Controllers\Controller.cs" />
     <Compile Include="Assets\Scripts\Controllers\ControllerBase.cs" />
     <Compile Include="Assets\Scripts\Controllers\Extensions\MessengerExtensions.cs" />
     <Compile Include="Assets\Scripts\Controllers\Flashlight\FlashlightController.cs" />
@@ -178,10 +176,10 @@
     <Compile Include="Assets\Scripts\Controllers\Heroes\EnemyController.cs" />
     <Compile Include="Assets\Scripts\Controllers\Messages.cs" />
     <Compile Include="Assets\Scripts\Controllers\Player\PlayerController.cs" />
+    <Compile Include="Assets\Scripts\Controllers\Weapons\BallisticWeaponController.cs" />
     <Compile Include="Assets\Scripts\Controllers\Weapons\LaserWeaponController.cs" />
     <Compile Include="Assets\Scripts\Controllers\Weapons\Messages\IWeaponControllerMessageTarget.cs" />
     <Compile Include="Assets\Scripts\Controllers\Weapons\WeaponController.cs" />
-    <Compile Include="Assets\Scripts\Controllers\Weapons\WeaponControllerBase.cs" />
     <Compile Include="Assets\Scripts\Controllers\Weapons\WeaponInStoreController.cs" />
     <Compile Include="Assets\Scripts\EventManager.cs" />
     <Compile Include="Assets\Scripts\Fire.cs" />
@@ -195,10 +193,10 @@
     <Compile Include="Assets\Scripts\Models\Heroes\SciFiWarrior.cs" />
     <Compile Include="Assets\Scripts\Models\IModel.cs" />
     <Compile Include="Assets\Scripts\Models\Player.cs" />
+    <Compile Include="Assets\Scripts\Models\Weapons\BallisticWeapon.cs" />
     <Compile Include="Assets\Scripts\Models\Weapons\Gun.cs" />
     <Compile Include="Assets\Scripts\Models\Weapons\LaserWeapon.cs" />
     <Compile Include="Assets\Scripts\Models\Weapons\Weapon.cs" />
-    <Compile Include="Assets\Scripts\Models\Weapons\WeaponBase.cs" />
     <Compile Include="Assets\Scripts\ObjectManager.cs" />
     <Compile Include="Assets\Scripts\Property.cs" />
     <Compile Include="Assets\Scripts\Timer.cs" />

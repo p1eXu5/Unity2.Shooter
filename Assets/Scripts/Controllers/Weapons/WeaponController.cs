@@ -1,51 +1,54 @@
-﻿using Shooter.Controllers.Weapons.Messages;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using Shooter.Controllers.Weapons.Messages;
+using Shooter.Models;
 using Shooter.Models.Weapons;
 using Shooter.Views;
-using UnityEngine;
 
 namespace Shooter.Controllers.Weapons
 {
-    public class WeaponController : WeaponControllerBase< Weapon >
+    public abstract class WeaponController< TModel > : ControllerBase< TModel >, IWeaponControllerMessageTarget
+        where TModel : Weapon, new()
     {
-        private Transform _artilleryTube;
+        private float _delay;
+        private Timer _rechargeTimer;
+
+        public bool CanFire() => Model.Armo > 0 && _rechargeTimer.IsStopped;
         
+        public void Fire( Fire fire = Shooter.Fire.PrimaryFire )
+        {
+            if (!CanFire() ) return;
+
+            if (_Fire( fire ) ) _rechargeTimer.Restart();;
+        }
+
+        protected abstract bool _Fire( Fire fire );
+
         protected override void Awake()
         {
             base.Awake();
 
-            _artilleryTube = Transform.Find( "GunT" );
+            _rechargeTimer = new Timer( Model.RechargeTime );
+            _delay = Model.RechargeTime;
         }
 
-        
-        protected override bool _Fire( Fire fire )
+        void Update()
         {
-            BulletController bullet = _getAmmunition( fire );
-
-            if ( bullet != null ) {
-                var res = Instantiate( bullet, _artilleryTube.transform.position, Transform.rotation )
-                    .TryGetComponent( typeof( Rigidbody ), out var newBullet );
-
-                if ( res ) {
-                    Model.Armo--;
-                    (( Rigidbody )newBullet).AddForce( _artilleryTube.forward * Model.Force );
-                    newBullet.gameObject.name = "Bullet";
-
-                    return true;
-                }
-            }
-
-            return false;
+            if ( _rechargeTimer.IsStopped ) return;
+            _rechargeTimer.Update();
         }
 
-        
-        private BulletController _getAmmunition( Fire fire)
+        public void ShowAway()
         {
-            var ind = (int)fire;
-            if ( Model.ammunition == null || Model.ammunition.Length == 0 || ind < 0 || ind >= Model.ammunition.Length ) {
-                return null;
-            }
-            
-            return Model.ammunition[ind];
+            Disable();
         }
-    }   
+
+        public void PullOut()
+        {
+            Enable();
+        }
+    }
 }

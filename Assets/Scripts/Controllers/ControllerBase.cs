@@ -1,16 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Shooter.Controllers;
-using Shooter.Models;
-using UnityEditor.IMGUI.Controls;
+﻿using Shooter.Models;
 using UnityEngine;
 
-namespace Shooter.Views
+namespace Shooter.Controllers
 {
-    public class ControllerBase< TModel > : BaseObject
+    public class ControllerBase : BaseObject
+    { }
+
+    public class ControllerBase< TModel > : ControllerBase
         where TModel : IModel, new()
     {
         [SerializeField]
@@ -18,5 +14,6 @@ namespace Shooter.Views
 
         public TModel Model => _model;
     }
+
 
 }
