@@ -29,9 +29,10 @@ namespace Shooter.Controllers
 
         void Start()
         {
-            _weaponControllers = GetChildrenTransforms<IWeaponControllerMessageTarget>()
-                .Select( c => { c.ShowAway(); return c; } )
-                .ToArray();
+            _weaponControllers = 
+                GetInChildren< IWeaponControllerMessageTarget >()
+                    .Select( c => { c.ShowAway(); return c; } )
+                    .ToArray();
 
             //BroadcastMessage( Messages.WeaponController.ShowAway );
 

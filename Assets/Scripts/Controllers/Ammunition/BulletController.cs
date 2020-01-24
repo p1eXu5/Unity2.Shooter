@@ -27,14 +27,19 @@ namespace Shooter.Controllers.Ammunition
 
         private void OnCollisionEnter( Collision collision )
         {
+            if ( collision.gameObject.tag == "Player" ) return;
+
             var comp = collision.gameObject.GetComponent< ISetDamage >();
             if ( comp == null ) {
                 comp = collision.gameObject.GetComponentInParent< ISetDamage >();
             }
 
-            _setDamage( comp );
+            if ( comp != null ) {
+                _setDamage( comp );
+            }
 
-            Destroy( Instance );
+            Destroy( Instance, 1 );
+            return;
         }
 
         private void _setDamage( ISetDamage obj )

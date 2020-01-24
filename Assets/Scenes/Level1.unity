@@ -741,7 +741,7 @@ GameObject:
   - component: {fileID: 93556961}
   m_Layer: 0
   m_Name: Cargo_Yard_Scene
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -18554,6 +18554,16 @@ PrefabInstance:
       propertyPath: m_Enabled
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 6869596080358114210, guid: b4b799acbbf0b0d44a07ac92259567f0,
+        type: 3}
+      propertyPath: _model._force
+      value: 200
+      objectReference: {fileID: 0}
+    - target: {fileID: 6869596080358114210, guid: b4b799acbbf0b0d44a07ac92259567f0,
+        type: 3}
+      propertyPath: _model.RechargeTime
+      value: 0.1
+      objectReference: {fileID: 0}
     - target: {fileID: 6869596080975749344, guid: b4b799acbbf0b0d44a07ac92259567f0,
         type: 3}
       propertyPath: m_Enabled
@@ -18629,6 +18639,11 @@ PrefabInstance:
       propertyPath: _model._damage
       value: 3
       objectReference: {fileID: 0}
+    - target: {fileID: 6869596082247011503, guid: b4b799acbbf0b0d44a07ac92259567f0,
+        type: 3}
+      propertyPath: _model._force
+      value: 100
+      objectReference: {fileID: 0}
     - target: {fileID: 7677022927797951008, guid: b4b799acbbf0b0d44a07ac92259567f0,
         type: 3}
       propertyPath: m_IsActive
@@ -18637,7 +18652,7 @@ PrefabInstance:
     - target: {fileID: 8263498011702869757, guid: b4b799acbbf0b0d44a07ac92259567f0,
         type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8427131872416746197, guid: b4b799acbbf0b0d44a07ac92259567f0,
         type: 3}
