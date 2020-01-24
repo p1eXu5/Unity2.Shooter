@@ -18,7 +18,7 @@ namespace AssemblyCSharp.Assets.Scripts.Controllers.Heroes
                 Color color = Material.color;
 
                 if ( color.a > 0 ) {
-                    color.a -= Model.Step / 100;
+                    color.a -= Model.Step / 100; 
                     Color = color;
                 }
 

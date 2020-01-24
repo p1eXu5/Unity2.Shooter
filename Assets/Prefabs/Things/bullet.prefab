@@ -216,7 +216,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _model:
-    _timeToDestruct: 2
+    _timeToDestruct: 10
     _damage: 20
     _mass: 0.01
 --- !u!136 &6560257337646813965

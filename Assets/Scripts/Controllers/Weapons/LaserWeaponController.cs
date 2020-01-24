@@ -4,13 +4,17 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Shooter.Contracts;
+using Shooter.Controllers.Weapons.Messages;
 using Shooter.Models.Ammunition;
+using Shooter.Models.Weapons;
 using UnityEngine;
 
 namespace Shooter.Controllers.Weapons
 {
-    public class LaserWeaponController : WeaponController
+    public class LaserWeaponController : WeaponControllerBase< LaserWeapon >
     {
+        public ParticleSystem _particleSystem;
+        public GameObject _hitParticle;
         protected override bool _Fire( Fire fire )
         {
             Model.Armo--;
@@ -39,7 +43,7 @@ namespace Shooter.Controllers.Weapons
 
         private void _CreateHitParticle( RaycastHit hit )
         {
-            GameObject particle = Instantiate( Model.HitParticle, hit.point, Quaternion.identity );
+            GameObject particle = Instantiate( _hitParticle, hit.point, Quaternion.identity );
             particle.transform.parent = hit.transform;
             Destroy( particle, 0.5f );
         }

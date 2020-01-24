@@ -114,6 +114,23 @@ namespace Shooter
             }
         }
 
+        public IEnumerable<Transform> GetChildrenTransforms()
+        {
+            for (int i = 0; i < transform.childCount; i++) { 
+                yield return transform.GetChild( i );
+            }
+        }
+
+         public virtual void Enable()
+        {
+            gameObject.SetActive( true );
+        }
+
+        public virtual void Disable()
+        {
+            gameObject.SetActive( false );
+        }
+
         #endregion
 
 

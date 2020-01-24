@@ -10,7 +10,7 @@ using UnityEngine;
 
 namespace Shooter.Views
 {
-    public class ControllerBase< TModel > : ControllerBase
+    public class ControllerBase< TModel > : BaseObject
         where TModel : IModel, new()
     {
         [SerializeField]
@@ -19,18 +19,4 @@ namespace Shooter.Views
         public TModel Model => _model;
     }
 
-
-    public class ControllerBase : BaseObject
-    {
-
-        public virtual void Enable()
-        {
-            gameObject.SetActive( true );
-        }
-
-        public virtual void Disable()
-        {
-            gameObject.SetActive( false );
-        }
-    }
 }

@@ -10168,41 +10168,26 @@ MonoBehaviour:
     ammunition: []
     _gunTransform: {fileID: 0}
     _force: 500
-    _particleSystem: {fileID: 0}
-    _hitParticle: {fileID: 0}
-    _damage: 0
   - RechargeTime: 500
     Armo: 0
     ammunition: []
     _gunTransform: {fileID: 0}
     _force: 500
-    _particleSystem: {fileID: 0}
-    _hitParticle: {fileID: 0}
-    _damage: 0
   - RechargeTime: 500
     Armo: 0
     ammunition: []
     _gunTransform: {fileID: 0}
     _force: 500
-    _particleSystem: {fileID: 0}
-    _hitParticle: {fileID: 0}
-    _damage: 0
   - RechargeTime: 500
     Armo: 0
     ammunition: []
     _gunTransform: {fileID: 0}
     _force: 500
-    _particleSystem: {fileID: 0}
-    _hitParticle: {fileID: 0}
-    _damage: 0
   - RechargeTime: 500
     Armo: 0
     ammunition: []
     _gunTransform: {fileID: 0}
     _force: 500
-    _particleSystem: {fileID: 0}
-    _hitParticle: {fileID: 0}
-    _damage: 0
 --- !u!1001 &1129624675
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -18547,7 +18532,7 @@ PrefabInstance:
     - target: {fileID: 4641222848821487406, guid: b4b799acbbf0b0d44a07ac92259567f0,
         type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5881090418176082934, guid: b4b799acbbf0b0d44a07ac92259567f0,
         type: 3}
@@ -18563,6 +18548,21 @@ PrefabInstance:
         type: 3}
       propertyPath: m_IsActive
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5901256126072787513, guid: b4b799acbbf0b0d44a07ac92259567f0,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6869596080975749344, guid: b4b799acbbf0b0d44a07ac92259567f0,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6869596081205333861, guid: b4b799acbbf0b0d44a07ac92259567f0,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6869596082105023688, guid: b4b799acbbf0b0d44a07ac92259567f0,
         type: 3}
@@ -18624,6 +18624,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: FPSController
       objectReference: {fileID: 0}
+    - target: {fileID: 6869596082247011503, guid: b4b799acbbf0b0d44a07ac92259567f0,
+        type: 3}
+      propertyPath: _model._damage
+      value: 3
+      objectReference: {fileID: 0}
     - target: {fileID: 7677022927797951008, guid: b4b799acbbf0b0d44a07ac92259567f0,
         type: 3}
       propertyPath: m_IsActive
@@ -18632,12 +18637,12 @@ PrefabInstance:
     - target: {fileID: 8263498011702869757, guid: b4b799acbbf0b0d44a07ac92259567f0,
         type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8427131872416746197, guid: b4b799acbbf0b0d44a07ac92259567f0,
         type: 3}
       propertyPath: m_Enabled
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b4b799acbbf0b0d44a07ac92259567f0, type: 3}

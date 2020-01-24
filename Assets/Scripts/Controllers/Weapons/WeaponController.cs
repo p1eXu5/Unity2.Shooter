@@ -1,49 +1,33 @@
-﻿using Shooter.Models.Weapons;
+﻿using Shooter.Controllers.Weapons.Messages;
+using Shooter.Models.Weapons;
 using Shooter.Views;
 using UnityEngine;
 
-namespace Shooter.Controllers
+namespace Shooter.Controllers.Weapons
 {
-    public class WeaponController : ControllerBase< Weapon >
+    public class WeaponController : WeaponControllerBase< Weapon >
     {
-        private float _delay;
-        private Timer _rechargeTimer;
-        
-        private Transform _gunElement;
+        private Transform _artilleryTube;
         
         protected override void Awake()
         {
             base.Awake();
 
-            _rechargeTimer = new Timer( Model.RechargeTime );
-            _delay = Model.RechargeTime;
-            _gunElement = Transform.Find( "GunT" );
+            _artilleryTube = Transform.Find( "GunT" );
         }
 
-        void Start()
-        {
-        }
         
-        public bool CanFire() => Model.Armo > 0 && _rechargeTimer.IsStopped;
-        
-        public void Fire( Fire fire = Shooter.Fire.PrimaryFire )
-        {
-            if (!CanFire() ) return;
-
-            if (_Fire( fire ) ) _rechargeTimer.Restart();;
-        }
-
-        protected virtual bool _Fire( Fire fire )
+        protected override bool _Fire( Fire fire )
         {
             BulletController bullet = _getAmmunition( fire );
 
             if ( bullet != null ) {
-                var res = Instantiate( bullet, _gunElement.transform.position, Transform.rotation )
+                var res = Instantiate( bullet, _artilleryTube.transform.position, Transform.rotation )
                     .TryGetComponent( typeof( Rigidbody ), out var newBullet );
 
                 if ( res ) {
                     Model.Armo--;
-                    (( Rigidbody )newBullet).AddForce( _gunElement.forward * Model.Force );
+                    (( Rigidbody )newBullet).AddForce( _artilleryTube.forward * Model.Force );
                     newBullet.gameObject.name = "Bullet";
 
                     return true;
@@ -53,13 +37,7 @@ namespace Shooter.Controllers
             return false;
         }
 
-        void Update()
-        {
-            if ( _rechargeTimer.IsStopped ) return;
-            _rechargeTimer.Update();
-        }
-
-
+        
         private BulletController _getAmmunition( Fire fire)
         {
             var ind = (int)fire;
