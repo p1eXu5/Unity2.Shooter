@@ -15,16 +15,21 @@ namespace Shooter.Models
         [SerializeField]
         private float _capacitance;
 
-        [RenameProperty("Power (I)")]
-        public float Power;
+        /// <summary>
+        /// How fast the battery runs out.
+        /// </summary>
+        [RenameProperty("power (I)")]
+        public float power;
 
-        [RenameProperty("Energy (C)")]
-        public float Energy;
+        /// <summary>
+        /// Battery charge in the flashlight.
+        /// </summary>
+        [RenameProperty("energy (C)")]
+        public float energy;
         
-        public float ChargingDuration = 2f;
+        public float rechargingDuration = 2f;
 
-        [HideInInspector]
-        public bool IsCharging = false;
+
 
         public float Capacitance => _capacitance;
     }

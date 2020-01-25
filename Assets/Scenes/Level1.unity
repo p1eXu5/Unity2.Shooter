@@ -7706,6 +7706,7 @@ GameObject:
   - component: {fileID: 893453392}
   - component: {fileID: 893453391}
   - component: {fileID: 893453390}
+  - component: {fileID: 893453394}
   m_Layer: 5
   m_Name: GUI Canvas
   m_TagString: Untagged
@@ -7793,6 +7794,19 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0, y: 0}
+--- !u!114 &893453394
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 893453389}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5c17ed67e9c57e944a4b86e8ec114981, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _batteryIndicator: {fileID: 0}
 --- !u!1001 &898063026
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -10165,22 +10179,27 @@ MonoBehaviour:
   _weapons:
   - RechargeTime: 500
     Magazine: 0
+    reticle: {fileID: 0}
     ammunition: []
     _force: 500
   - RechargeTime: 500
     Magazine: 0
+    reticle: {fileID: 0}
     ammunition: []
     _force: 500
   - RechargeTime: 500
     Magazine: 0
+    reticle: {fileID: 0}
     ammunition: []
     _force: 500
   - RechargeTime: 500
     Magazine: 0
+    reticle: {fileID: 0}
     ammunition: []
     _force: 500
   - RechargeTime: 500
     Magazine: 0
+    reticle: {fileID: 0}
     ammunition: []
     _force: 500
 --- !u!1001 &1129624675
@@ -10779,7 +10798,7 @@ MonoBehaviour:
   m_PreserveAspect: 0
   m_FillCenter: 1
   m_FillMethod: 0
-  m_FillAmount: 1
+  m_FillAmount: 0
   m_FillClockwise: 1
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
@@ -19700,7 +19719,7 @@ GameObject:
   - component: {fileID: 2106102850}
   - component: {fileID: 2106102849}
   m_Layer: 5
-  m_Name: ProgressBar
+  m_Name: BatteryProgressBar
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -20490,6 +20509,16 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Enabled
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6869596081205333861, guid: b4b799acbbf0b0d44a07ac92259567f0,
+        type: 3}
+      propertyPath: _model.energy
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 6869596081205333861, guid: b4b799acbbf0b0d44a07ac92259567f0,
+        type: 3}
+      propertyPath: _model.power
+      value: 0.1
       objectReference: {fileID: 0}
     - target: {fileID: 6869596082105023688, guid: b4b799acbbf0b0d44a07ac92259567f0,
         type: 3}

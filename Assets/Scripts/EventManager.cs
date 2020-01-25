@@ -5,7 +5,9 @@ using System.Collections.Generic;
 
 namespace Shooter
 {
-
+    /*
+     *  Is not used.
+     */
     public class EventManager : MonoBehaviour
     {
 

@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using AssemblyCSharp.Assets.Scripts;
 using Shooter.Controllers;
 using Shooter.Controllers.Weapons;
 using Shooter.Controllers.Weapons.Messages;

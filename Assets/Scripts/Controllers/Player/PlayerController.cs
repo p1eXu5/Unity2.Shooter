@@ -37,7 +37,7 @@ namespace Shooter.Controllers
         void Update()
         {
             if ( Input.GetKeyDown( KeyCode.F )) {
-                _flashlightController.StartRecharge();
+                _flashlightController.StartRecharging();
             }
             if ( Input.GetKeyUp( KeyCode.F )) {
                 _flashlightController.ResetCharging();

@@ -9,6 +9,7 @@ using Shooter.Models;
 using Shooter.Models.Weapons;
 using Shooter.Views;
 using UnityEngine;
+using UnityEngine.UI;
 
 namespace Shooter.Controllers.Weapons
 {
@@ -17,7 +18,7 @@ namespace Shooter.Controllers.Weapons
     {
         public ParticleSystem gunshotFlash;
         public GameObject hitParticle;
-
+        
 
         protected Transform artilleryTube;
 
@@ -88,11 +89,15 @@ namespace Shooter.Controllers.Weapons
 
         protected virtual void OnGUI()
         {
-            int size = 12;
-            float posX = Camera.pixelWidth / 2 - size / 2;
-            float posY = Camera.pixelHeight / 2 - size / 2;
+            if ( Model.reticle == null ) return;
 
-            GUI.Label( new Rect( posX, posY, size, size ), "*" );
+            int width = Model.reticle.width;
+            int height = Model.reticle.height;
+
+            float posX = Camera.pixelWidth / 2 - width / 2;
+            float posY = Camera.pixelHeight / 2 - height / 2;
+
+            GUI.Label( new Rect( posX, posY, width, height ), Model.reticle );
         }
 
 

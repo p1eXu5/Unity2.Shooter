@@ -47,6 +47,8 @@ namespace Shooter
                 }
             }
 
+
+
             //_instance = this;
 
             //_controllersGameObject = new GameObject( "Controllers" );

@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Shooter.Helpers;
+using UnityEngine;
 
 namespace Shooter.Models.Weapons
 {
@@ -13,5 +14,6 @@ namespace Shooter.Models.Weapons
         [RenameProperty("Init Recharge time in sec.")]
         public float RechargeTime = 1;
         public int Magazine;
+        public Texture reticle;
     }
 }

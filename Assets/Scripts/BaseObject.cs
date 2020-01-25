@@ -11,15 +11,12 @@ namespace Shooter
     public abstract class BaseObject : MonoBehaviour
     {
         #region fields
-
-
         private bool _isVisible;
 
         #endregion
 
 
         #region properties
-
         public GameObject GameObject { get; private set; }
         public Camera Camera { get; private set; }
         public Animator Animator { get; private set; }
@@ -41,7 +38,6 @@ namespace Shooter
             get => Transform.rotation;
             set => Transform.rotation = value;
         }
-
 
 
         public Rigidbody Rigidbody { get; private set; }
@@ -73,38 +69,6 @@ namespace Shooter
                 AskLayer( inst.transform, inst.layer );
             }
         }
-
-
-
-
-
-        private void AskLayer( Transform obj, int layer )
-        {
-            foreach ( Transform child in obj ) {
-                AskLayer( child, layer );
-            }
-        }
-
-
-
-
-        private void AskColor( Transform obj, Color color )
-        {
-            // ReSharper disable once LocalVariableHidesMember
-            var renderer = obj.GetComponent<Renderer>();
-            if ( renderer ) {
-                if ( renderer.material ) {
-                    renderer.material.color = color;
-                }
-            }
-            foreach ( Transform child in obj ) {
-                AskColor( child, color );
-            }
-        }
-
-
-
-
         public bool IsVisible
         {
             get => _isVisible;
@@ -117,35 +81,10 @@ namespace Shooter
             }
         }
 
-        public IEnumerable<Transform> GetChildrenTransforms()
-        {
-            for (int i = 0; i < transform.childCount; i++) { 
-                yield return transform.GetChild( i );
-            }
-        }
-
-        public IEnumerable<T> GetInChildren<T>()
-        {
-            for (int i = 0; i < transform.childCount; i++) { 
-                yield return transform.GetChild( i ).gameObject.GetComponent<T>();
-            }
-        }
-
-         public virtual void Activate()
-        {
-            gameObject.SetActive( true );
-        }
-
-        public virtual void Deactivate()
-        {
-            gameObject.SetActive( false );
-        }
-
         #endregion
 
 
         #region activities
-
         protected virtual void Awake()
         {
             GameObject = gameObject;
@@ -156,11 +95,79 @@ namespace Shooter
             TryCacheComponent< Renderer >( c => Renderer = c );
         }
 
-        private void TryCacheComponent<T>( Action< T > propertySetter )
+        #endregion
+
+
+        #region methods
+        public virtual void Activate()
+        {
+            gameObject.SetActive( true );
+        }
+        public virtual void Deactivate()
+        {
+            gameObject.SetActive( false );
+        }
+
+
+        public IEnumerable<Transform> GetChildrenTransforms()
+        {
+            for (int i = 0; i < transform.childCount; i++) {
+                yield return transform.GetChild( i );
+            }
+        }
+        public IEnumerable<T> GetInChildren<T>()
+        {
+            for (int i = 0; i < transform.childCount; i++) {
+                yield return transform.GetChild( i ).gameObject.GetComponent<T>();
+            }
+        }
+
+
+        protected void TryCacheComponent<T>( Action<T> propertySetter )
             where T : Component
         {
-            T comp = GetComponent< T >();
+            T comp = GetComponent<T>();
             propertySetter( comp ? comp : null );
+        }
+        protected void TryCacheComponentInChildren<T>( Action<T> propertySetter )
+            where T : Component
+        {
+            T comp = Transform.GetComponentInChildren< T >();
+            propertySetter( comp ? comp : null );
+        }
+        protected void FindOrCreateComponent<T>( string componentName, Action<T> propertySetter )
+            where T : Component
+        {
+            var obj = GameObject.Find( "BatteryProgressBar" );
+            if ( obj ) {
+
+                T comp = obj.GetComponent<T>();
+                if ( !comp ) {
+                    comp = obj.AddComponent<T>();
+                }
+
+                propertySetter( comp );
+            }
+        }
+
+        private void AskLayer( Transform obj, int layer )
+        {
+            foreach (Transform child in obj) {
+                AskLayer( child, layer );
+            }
+        }
+        private void AskColor( Transform obj, Color color )
+        {
+            // ReSharper disable once LocalVariableHidesMember
+            var renderer = obj.GetComponent<Renderer>();
+            if (renderer) {
+                if (renderer.material) {
+                    renderer.material.color = color;
+                }
+            }
+            foreach (Transform child in obj) {
+                AskColor( child, color );
+            }
         }
 
         #endregion
