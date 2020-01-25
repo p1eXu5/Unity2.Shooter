@@ -1,6 +1,8 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using Shooter.Helpers;
 using UnityEngine;
 // ReSharper disable CheckNamespace
 
@@ -19,8 +21,9 @@ namespace Shooter
         #region properties
 
         public GameObject GameObject { get; private set; }
-        public Animator Animator { get; private set; }
         public Camera Camera { get; private set; }
+        public Animator Animator { get; private set; }
+
 
         public Transform Transform => GameObject.transform;
         public Vector3 Position
@@ -42,10 +45,11 @@ namespace Shooter
 
 
         public Rigidbody Rigidbody { get; private set; }
-        public Material Material => GameObject.GetComponent<Renderer>().material;
+        public Renderer Renderer { get; private set; }
+        public Material Material => Renderer?.material;
         public Color Color
         {
-            get => Material.color;
+            get => Material?.color ?? Colors.Default;
             set {
                 var material = Material;
                 if ( material ) {
@@ -106,15 +110,9 @@ namespace Shooter
             get => _isVisible;
             set {
                 _isVisible = value;
-                var inst = GameObject;
-                MeshRenderer r;
-                if ( (r = inst.GetComponent<MeshRenderer>()) != null ) {
-                    r.enabled = _isVisible;
-                }
 
-                SkinnedMeshRenderer s;
-                if ( (s = inst.GetComponent<SkinnedMeshRenderer>()) != null ) {
-                    s.enabled = _isVisible;
+                if ( Renderer ) {
+                    Renderer.enabled = value;
                 }
             }
         }
@@ -133,12 +131,12 @@ namespace Shooter
             }
         }
 
-         public virtual void Enable()
+         public virtual void Activate()
         {
             gameObject.SetActive( true );
         }
 
-        public virtual void Disable()
+        public virtual void Deactivate()
         {
             gameObject.SetActive( false );
         }
@@ -153,13 +151,16 @@ namespace Shooter
             GameObject = gameObject;
             Camera = Camera.main;
 
-            if ( GetComponent< Rigidbody >() ) {
-                Rigidbody = GetComponent< Rigidbody >();
-            }
+            TryCacheComponent< Rigidbody >( c => Rigidbody = c );
+            TryCacheComponent< Animator >( c => Animator = c );
+            TryCacheComponent< Renderer >( c => Renderer = c );
+        }
 
-            if ( GetComponent< Animator>() ) {
-                Animator = GetComponent< Animator>();
-            }
+        private void TryCacheComponent<T>( Action< T > propertySetter )
+            where T : Component
+        {
+            T comp = GetComponent< T >();
+            propertySetter( comp ? comp : null );
         }
 
         #endregion

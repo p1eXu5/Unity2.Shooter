@@ -14,8 +14,6 @@ namespace Shooter.Controllers.Weapons
 {
     public class LaserWeaponController : WeaponController< LaserWeapon >
     {
-        public GameObject hitParticle;
-
         protected override bool TryFire( Fire fire )
         {
             RaycastHit hit;

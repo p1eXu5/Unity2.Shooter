@@ -16,38 +16,27 @@ namespace Shooter.Controllers.Weapons
         where TModel : Weapon, new()
     {
         public ParticleSystem gunshotFlash;
+        public GameObject hitParticle;
+
+
         protected Transform artilleryTube;
+
+
+        [SerializeField]
+        private int _runningArmo;
         
+        private float _delay;
+        private Timer _rechargeTimer;
+        private bool _isFire;
+
+
+        #region initialization
         protected override void Awake()
         {
             base.Awake();
 
             artilleryTube = Transform.Find( "GunT" );
         }
-        
-
-        private float _delay;
-        private Timer _rechargeTimer;
-        
-        [SerializeField]
-        private int _runningArmo;
-
-        public bool CanFire() => _runningArmo > 0 && _rechargeTimer.IsStopped;
-        
-        public void Fire( Fire fire = Shooter.Fire.PrimaryFire )
-        {
-            if (!CanFire() ) return;
-
-            if ( TryFire( fire ) ) {
-                // TODO: need to update package with weapons (idle position animation was deleted)
-                //Animator.SetBool( "shoot", true );
-                gunshotFlash?.Play(true);
-                --_runningArmo;
-                _rechargeTimer.Restart();
-            };
-        }
-
-        protected abstract bool TryFire( Fire fire );
 
         protected virtual void Start()
         {
@@ -58,12 +47,42 @@ namespace Shooter.Controllers.Weapons
             gunshotFlash = Instantiate( gunshotFlash, this.artilleryTube );
         }
 
+        #endregion
+
+
+        #region properties
+
+        public bool CanFire() => _runningArmo > 0 && _rechargeTimer.IsStopped;
+
+        protected bool IsFire
+        {
+            get => _isFire;
+            set {
+                _isFire = value;
+                Animator.SetBool( "shoot", value );
+            }
+        }
+
+        #endregion
+
+
+        #region update
+
         void Update()
         {
-            if ( _rechargeTimer.IsStopped ) return;
+            if (_rechargeTimer.IsStopped) {
+                // default behavior here:
+                
+                return;
+            }
+
+            // fire
             _rechargeTimer.Update();
+
             if ( _rechargeTimer.IsDingDong ) {
-                //Animator.SetBool( "shoot", false );
+                if ( IsFire ) {
+                    IsFire = false;
+                }
             }
         }
 
@@ -71,24 +90,50 @@ namespace Shooter.Controllers.Weapons
         {
             int size = 12;
             float posX = Camera.pixelWidth / 2 - size / 2;
-            float posY = Camera.pixelHeight/ 2 - size / 2;
+            float posY = Camera.pixelHeight / 2 - size / 2;
 
             GUI.Label( new Rect( posX, posY, size, size ), "*" );
         }
 
+
+        #endregion
+
+
+        #region IWeaponControllerMessageTarget implementation
+
+        public void Fire( Fire fire = Shooter.Fire.PrimaryFire )
+        {
+            if (!CanFire() ) return;
+
+            if ( TryFire( fire ) ) 
+            {
+                if ( !IsFire ) { IsFire = true; }
+
+                gunshotFlash?.Play(true);
+                
+                --_runningArmo;
+                _rechargeTimer.Restart();
+            };
+        }
+
         public void ShowAway()
         {
-            Disable();
+            Deactivate();
         }
 
         public void PullOut()
         {
-            Enable();
+            Activate();
         }
 
         public void Recharge()
         {
             _runningArmo = Model.Magazine;
         }
+
+        #endregion
+
+
+        protected abstract bool TryFire( Fire fire );
     }
 }

@@ -23,7 +23,7 @@ namespace Shooter.Controllers
         {
             base.Awake();
 
-            _flashlightController = GetComponentInChildren< FlashlightController >();
+            _flashlightController = GetComponentInChildren< FlashlightController >( true) ;
             _weaponsInStoreController = GetComponentInChildren< WeaponInStoreController >();
         }
 

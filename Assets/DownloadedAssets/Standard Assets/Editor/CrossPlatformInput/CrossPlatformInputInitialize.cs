@@ -24,7 +24,7 @@ namespace UnityStandardAssets.CrossPlatformInput.Inspector
         }
 
 
-        [MenuItem("Mobile Input/Enable")]
+        [MenuItem("Mobile Input/Activate")]
         private static void Enable()
         {
             SetEnabled("MOBILE_INPUT", true, true);
@@ -49,7 +49,7 @@ namespace UnityStandardAssets.CrossPlatformInput.Inspector
         }
 
 
-        [MenuItem("Mobile Input/Enable", true)]
+        [MenuItem("Mobile Input/Activate", true)]
         private static bool EnableValidate()
         {
             var defines = GetDefinesList(mobileBuildTargetGroups[0]);
@@ -57,7 +57,7 @@ namespace UnityStandardAssets.CrossPlatformInput.Inspector
         }
 
 
-        [MenuItem("Mobile Input/Disable")]
+        [MenuItem("Mobile Input/Deactivate")]
         private static void Disable()
         {
             SetEnabled("MOBILE_INPUT", false, true);
@@ -73,7 +73,7 @@ namespace UnityStandardAssets.CrossPlatformInput.Inspector
         }
 
 
-        [MenuItem("Mobile Input/Disable", true)]
+        [MenuItem("Mobile Input/Deactivate", true)]
         private static bool DisableValidate()
         {
             var defines = GetDefinesList(mobileBuildTargetGroups[0]);

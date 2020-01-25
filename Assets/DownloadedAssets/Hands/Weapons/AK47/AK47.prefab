@@ -1164,7 +1164,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3144264181294545156}
   - component: {fileID: 5234718772710856079}
-  - component: {fileID: 4030883551119781013}
+  - component: {fileID: 8755252604597483627}
   m_Layer: 0
   m_Name: AK47
   m_TagString: Untagged
@@ -1208,7 +1208,7 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
---- !u!114 &4030883551119781013
+--- !u!114 &8755252604597483627
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -1222,10 +1222,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _model:
     RechargeTime: 1
-    Armo: 0
-    _damage: 0
-  _particleSystem: {fileID: 0}
-  _hitParticle: {fileID: 0}
+    Magazine: 30
+    _damage: 22
+  gunshotFlash: {fileID: 8501813154947669034, guid: 5a9829715c585b84e93a6169d590ed00,
+    type: 3}
+  _runningArmo: 0
+  hitParticle: {fileID: 100010, guid: 031d08f52af1daa4f929b85221519426, type: 3}
 --- !u!1 &4318189575660761834
 GameObject:
   m_ObjectHideFlags: 0
