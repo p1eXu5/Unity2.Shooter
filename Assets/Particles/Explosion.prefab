@@ -23609,7 +23609,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0ac1691131a8c844dafe8b6ace6a172a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  explosionForce: 20
+  explosionForce: 0.01
 --- !u!114 &11400000
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -23622,7 +23622,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 039587c051912eb4ead9e58344c5f3ce, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  multiplier: 1
+  multiplier: 0.0001
 --- !u!108 &10800000
 Light:
   m_ObjectHideFlags: 0
@@ -28363,7 +28363,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &400016
 Transform:
   m_ObjectHideFlags: 0

@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Shooter.Controllers;
+using Shooter.Controllers.Weapons.Messages;
 using Shooter.Models;
 using Shooter.Views;
 using UnityEngine;
@@ -41,6 +42,10 @@ namespace Shooter.Controllers
             if ( Input.GetKeyUp( KeyCode.F )) {
                 _flashlightController.ResetCharging();
                 _flashlightController.Toggle();
+            }
+
+            if ( Input.GetKeyDown( KeyCode.R )) {
+                BroadcastMessage( nameof(IWeaponControllerMessageTarget.Recharge) );
             }
 
             if ( Input.GetAxis( "Mouse ScrollWheel" ) > 0 ) {

@@ -22,7 +22,7 @@ namespace Shooter.Controllers
 
         private IWeaponControllerMessageTarget[] _weaponControllers;
 
-        private IWeaponControllerMessageTarget _SelectedWeaponController => _weaponControllers[_selectedWeapon];
+        private IWeaponControllerMessageTarget SelectedWeaponController => _weaponControllers[_selectedWeapon];
 
 
         public int Count => _weaponControllers.Length;
@@ -36,28 +36,28 @@ namespace Shooter.Controllers
 
             //BroadcastMessage( Messages.WeaponController.ShowAway );
 
-            var sw = _SelectedWeaponController;
-            _SelectedWeaponController.PullOut();
+            var sw = SelectedWeaponController;
+            SelectedWeaponController.PullOut();
         }
 
         public void NextWeapon()
         {
             if ( _selectedWeapon == Count - 1 ) {
-                _ChangeWeapon( 0 );
+                ChangeWeapon( 0 );
                 return;
             }
 
-            _ChangeWeapon( _selectedWeapon + 1 );
+            ChangeWeapon( _selectedWeapon + 1 );
         }
 
         public void PrevWeapon()
         {
             if ( _selectedWeapon == 0 ) {
-                _ChangeWeapon( Count - 1 );
+                ChangeWeapon( Count - 1 );
                 return;
             }
 
-            _ChangeWeapon( _selectedWeapon - 1 );
+            ChangeWeapon( _selectedWeapon - 1 );
         }
 
         public void ChooseWeapon( int index )
@@ -77,19 +77,23 @@ namespace Shooter.Controllers
                 return;
             }
 
-            _ChangeWeapon( nextWeapon );
+            this.
+
+            ChangeWeapon( nextWeapon );
         }
 
-        private void _ChangeWeapon( int nextIndex )
+        private void ChangeWeapon( int nextIndex )
         {
-            _SelectedWeaponController.ShowAway();
+            SelectedWeaponController.ShowAway();
+            Debug.Log( $"ShowAway #{_selectedWeapon}" );
             _selectedWeapon = nextIndex;
-            _SelectedWeaponController.PullOut();
+            SelectedWeaponController.PullOut();
+            Debug.Log( $"PullOut #{_selectedWeapon}" );
         }
 
         public void FireSelected( Fire fire = Fire.PrimaryFire )
         {
-            _SelectedWeaponController.Fire( fire );
+            SelectedWeaponController.Fire( fire );
         }
     }
 }

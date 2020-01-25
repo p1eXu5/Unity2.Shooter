@@ -12,6 +12,6 @@ namespace Shooter.Models.Weapons
     {
         [RenameProperty("Init Recharge time in sec.")]
         public float RechargeTime = 1;
-        public float Armo;
+        public int Magazine;
     }
 }

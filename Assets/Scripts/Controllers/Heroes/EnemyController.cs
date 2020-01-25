@@ -17,8 +17,8 @@ namespace Shooter.Controllers.Heroes
                 }
 
                 if (color.a < 1) {
-                    Destroy( Instance.GetComponent< Collider >() );
-                    Destroy( Instance, 5f );
+                    Destroy( GameObject.GetComponent< Collider >() );
+                    Destroy( GameObject, 5f );
                 }
             }
         }

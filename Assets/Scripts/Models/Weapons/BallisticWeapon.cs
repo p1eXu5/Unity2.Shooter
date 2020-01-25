@@ -20,7 +20,6 @@ namespace Shooter.Models.Weapons
 
         public BulletController[] ammunition;
 
-        [SerializeField] protected Transform _gunTransform;
         [SerializeField] protected float _force = 500;
 
         

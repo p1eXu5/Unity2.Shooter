@@ -10,8 +10,6 @@ namespace Shooter
     {
         #region fields
 
-        protected Camera _MainCamera;
-        protected Animator _Animator;
 
         private bool _isVisible;
 
@@ -20,39 +18,31 @@ namespace Shooter
 
         #region properties
 
-        public GameObject Instance { get; protected set; }
+        public GameObject GameObject { get; private set; }
+        public Animator Animator { get; private set; }
+        public Camera Camera { get; private set; }
 
-        public Transform Transform => Instance.transform;
-
-
-        public Rigidbody Rigidbody { get; protected set; }
-
-        public string Name
+        public Transform Transform => GameObject.transform;
+        public Vector3 Position
         {
-            get => Instance.name;
-            set => Instance.name = value;
+            get => Transform.position;
+            set => Transform.position = value;
         }
-
-        public int Layer
+        public Vector3 Scale
         {
-            get => Instance.layer;
-            set {
-                var inst = Instance;
-                inst.layer = value;
-                AskLayer( inst.transform, inst.layer );
-            }
+            get => Transform.localScale;
+            set => Transform.localScale = value;
         }
-
-        private void AskLayer( Transform obj, int layer )
+        public Quaternion Rotation
         {
-            foreach ( Transform child in obj ) {
-                AskLayer( child, layer );
-            }
+            get => Transform.rotation;
+            set => Transform.rotation = value;
         }
 
 
-        public Material Material => Instance.GetComponent<Renderer>().material;
 
+        public Rigidbody Rigidbody { get; private set; }
+        public Material Material => GameObject.GetComponent<Renderer>().material;
         public Color Color
         {
             get => Material.color;
@@ -63,6 +53,36 @@ namespace Shooter
                 }
             }
         }
+
+
+        public string Name
+        {
+            get => GameObject.name;
+            set => GameObject.name = value;
+        }
+        public int Layer
+        {
+            get => GameObject.layer;
+            set {
+                var inst = GameObject;
+                inst.layer = value;
+                AskLayer( inst.transform, inst.layer );
+            }
+        }
+
+
+
+
+
+        private void AskLayer( Transform obj, int layer )
+        {
+            foreach ( Transform child in obj ) {
+                AskLayer( child, layer );
+            }
+        }
+
+
+
 
         private void AskColor( Transform obj, Color color )
         {
@@ -78,30 +98,15 @@ namespace Shooter
             }
         }
 
-        public Vector3 Position
-        {
-            get => Transform.position;
-            set => Transform.position = value;
-        }
 
-        public Vector3 Scale
-        {
-            get => Transform.localScale;
-            set => Transform.localScale = value;
-        }
 
-        public Quaternion Rotation
-        {
-            get => Transform.rotation;
-            set => Transform.rotation = value;
-        }
 
         public bool IsVisible
         {
             get => _isVisible;
             set {
                 _isVisible = value;
-                var inst = Instance;
+                var inst = GameObject;
                 MeshRenderer r;
                 if ( (r = inst.GetComponent<MeshRenderer>()) != null ) {
                     r.enabled = _isVisible;
@@ -145,15 +150,15 @@ namespace Shooter
 
         protected virtual void Awake()
         {
-            Instance = gameObject;
-            _MainCamera = Camera.main;
+            GameObject = gameObject;
+            Camera = Camera.main;
 
             if ( GetComponent< Rigidbody >() ) {
                 Rigidbody = GetComponent< Rigidbody >();
             }
 
             if ( GetComponent< Animator>() ) {
-                _Animator = GetComponent< Animator>();
+                Animator = GetComponent< Animator>();
             }
         }
 

@@ -17,7 +17,7 @@ namespace Shooter
 
         //private static Main _instance;
 
-        //public static Main Instance => _instance == null ? (_instance = new Main()) : _instance;
+        //public static Main GameObject => _instance == null ? (_instance = new Main()) : _instance;
 
         //private GameObject _controllersGameObject;
         //private InputController _inputController;

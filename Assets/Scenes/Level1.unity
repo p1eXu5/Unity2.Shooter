@@ -10164,29 +10164,24 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _weapons:
   - RechargeTime: 500
-    Armo: 0
+    Magazine: 0
     ammunition: []
-    _gunTransform: {fileID: 0}
     _force: 500
   - RechargeTime: 500
-    Armo: 0
+    Magazine: 0
     ammunition: []
-    _gunTransform: {fileID: 0}
     _force: 500
   - RechargeTime: 500
-    Armo: 0
+    Magazine: 0
     ammunition: []
-    _gunTransform: {fileID: 0}
     _force: 500
   - RechargeTime: 500
-    Armo: 0
+    Magazine: 0
     ammunition: []
-    _gunTransform: {fileID: 0}
     _force: 500
   - RechargeTime: 500
-    Armo: 0
+    Magazine: 0
     ammunition: []
-    _gunTransform: {fileID: 0}
     _force: 500
 --- !u!1001 &1129624675
 PrefabInstance:
@@ -18532,8 +18527,50 @@ PrefabInstance:
     - target: {fileID: 4641222848821487406, guid: b4b799acbbf0b0d44a07ac92259567f0,
         type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 5533148755768344559, guid: b4b799acbbf0b0d44a07ac92259567f0,
+        type: 3}
+      propertyPath: _hitParticle
+      value: 
+      objectReference: {fileID: 100010, guid: 031d08f52af1daa4f929b85221519426, type: 3}
+    - target: {fileID: 5533148755768344559, guid: b4b799acbbf0b0d44a07ac92259567f0,
+        type: 3}
+      propertyPath: _model.RechargeTime
+      value: 0.05
+      objectReference: {fileID: 0}
+    - target: {fileID: 5533148755768344559, guid: b4b799acbbf0b0d44a07ac92259567f0,
+        type: 3}
+      propertyPath: _model.Armo
+      value: 30
+      objectReference: {fileID: 0}
+    - target: {fileID: 5533148755768344559, guid: b4b799acbbf0b0d44a07ac92259567f0,
+        type: 3}
+      propertyPath: _model._damage
+      value: 22
+      objectReference: {fileID: 0}
+    - target: {fileID: 5533148755768344559, guid: b4b799acbbf0b0d44a07ac92259567f0,
+        type: 3}
+      propertyPath: _particleSystem
+      value: 
+      objectReference: {fileID: 8501813154947669034, guid: 5a9829715c585b84e93a6169d590ed00,
+        type: 3}
+    - target: {fileID: 5533148755768344559, guid: b4b799acbbf0b0d44a07ac92259567f0,
+        type: 3}
+      propertyPath: _model.Magazine
+      value: 30
+      objectReference: {fileID: 0}
+    - target: {fileID: 5533148755768344559, guid: b4b799acbbf0b0d44a07ac92259567f0,
+        type: 3}
+      propertyPath: hitParticle
+      value: 
+      objectReference: {fileID: 100010, guid: 031d08f52af1daa4f929b85221519426, type: 3}
+    - target: {fileID: 5533148755768344559, guid: b4b799acbbf0b0d44a07ac92259567f0,
+        type: 3}
+      propertyPath: gunshotFlash
+      value: 
+      objectReference: {fileID: 8501813154947669034, guid: 5a9829715c585b84e93a6169d590ed00,
+        type: 3}
     - target: {fileID: 5881090418176082934, guid: b4b799acbbf0b0d44a07ac92259567f0,
         type: 3}
       propertyPath: m_IsActive
@@ -18564,6 +18601,12 @@ PrefabInstance:
       propertyPath: _model.RechargeTime
       value: 0.1
       objectReference: {fileID: 0}
+    - target: {fileID: 6869596080358114210, guid: b4b799acbbf0b0d44a07ac92259567f0,
+        type: 3}
+      propertyPath: gunshotFlash
+      value: 
+      objectReference: {fileID: 8501813154947669034, guid: 5a9829715c585b84e93a6169d590ed00,
+        type: 3}
     - target: {fileID: 6869596080975749344, guid: b4b799acbbf0b0d44a07ac92259567f0,
         type: 3}
       propertyPath: m_Enabled
@@ -18644,6 +18687,12 @@ PrefabInstance:
       propertyPath: _model._force
       value: 100
       objectReference: {fileID: 0}
+    - target: {fileID: 6869596082247011503, guid: b4b799acbbf0b0d44a07ac92259567f0,
+        type: 3}
+      propertyPath: gunshotFlash
+      value: 
+      objectReference: {fileID: 8501813154947669034, guid: 5a9829715c585b84e93a6169d590ed00,
+        type: 3}
     - target: {fileID: 7677022927797951008, guid: b4b799acbbf0b0d44a07ac92259567f0,
         type: 3}
       propertyPath: m_IsActive
@@ -18659,5 +18708,6 @@ PrefabInstance:
       propertyPath: m_Enabled
       value: 0
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 6869596080738731234, guid: b4b799acbbf0b0d44a07ac92259567f0, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: b4b799acbbf0b0d44a07ac92259567f0, type: 3}

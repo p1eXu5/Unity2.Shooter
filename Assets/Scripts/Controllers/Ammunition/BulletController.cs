@@ -19,7 +19,7 @@ namespace Shooter.Controllers.Ammunition
             base.Awake();
 
             // 	self-destructing
-            Destroy( Instance, Model.TimeToDestruct );
+            Destroy( GameObject, Model.TimeToDestruct );
 
             _currentDamage = Model.Damage;
             Rigidbody.mass = Model.Mass;
@@ -38,7 +38,7 @@ namespace Shooter.Controllers.Ammunition
                 _setDamage( comp );
             }
 
-            Destroy( Instance, 1 );
+            Destroy( GameObject, 1 );
             return;
         }
 

@@ -8,10 +8,9 @@ using UnityEngine;
 
 namespace Shooter.Models.Weapons
 {
+    [Serializable]
     public class LaserWeapon : Weapon
     {
-        
-
         [SerializeField] protected float _damage;
 
         public float Damage => _damage;

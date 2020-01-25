@@ -183,6 +183,7 @@
     <Compile Include="Assets\Scripts\Controllers\Weapons\WeaponInStoreController.cs" />
     <Compile Include="Assets\Scripts\EventManager.cs" />
     <Compile Include="Assets\Scripts\Fire.cs" />
+    <Compile Include="Assets\Scripts\Helpers\ColorizePropertyAttribute.cs" />
     <Compile Include="Assets\Scripts\Helpers\RenamePropertyAttribute.cs" />
     <Compile Include="Assets\Scripts\Main.cs" />
     <Compile Include="Assets\Scripts\Models\Ammunition\AmmunitionBase.cs" />
