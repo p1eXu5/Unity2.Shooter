@@ -1,25 +1,5 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!114 &6869596080738731234
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4641222848821487406}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 486a2e577ed605c40b7c1dc5132b83fb, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _model:
-    RechargeTime: 1
-    Armo: 0
-    ammunition: []
-    _GunTransform: {fileID: 0}
-    _Force: 500
-    _ParticleSystem: {fileID: 0}
-    _HitParticle: {fileID: 0}
 --- !u!114 &6869596081375251507
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -34,12 +14,14 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _model:
     RechargeTime: 1
-    Armo: 0
+    Magazine: 0
+    reticle: {fileID: 0}
+    claimSize: 50
     ammunition: []
-    _GunTransform: {fileID: 0}
-    _Force: 500
-    _ParticleSystem: {fileID: 0}
-    _HitParticle: {fileID: 0}
+    _force: 500
+  gunshotFlash: {fileID: 0}
+  hitParticle: {fileID: 0}
+  _runningArmo: 0
 --- !u!114 &6869596080358114210
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -54,13 +36,15 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _model:
     RechargeTime: 0.05
-    Armo: 100
+    Magazine: 0
+    reticle: {fileID: 0}
+    claimSize: 50
     ammunition:
     - {fileID: 8156080077677902398, guid: 5c863f94413a7954baeada77bfae9a8d, type: 3}
-    _GunTransform: {fileID: 0}
-    _Force: 80
-    _ParticleSystem: {fileID: 0}
-    _HitParticle: {fileID: 0}
+    _force: 500
+  gunshotFlash: {fileID: 0}
+  hitParticle: {fileID: 0}
+  _runningArmo: 0
 --- !u!1 &6869596082105442536
 GameObject:
   m_ObjectHideFlags: 0
@@ -470,13 +454,15 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _model:
     RechargeTime: 0.05
-    Armo: 50
+    Magazine: 0
+    reticle: {fileID: 0}
+    claimSize: 50
     ammunition:
     - {fileID: 8156080077677902398, guid: 5c863f94413a7954baeada77bfae9a8d, type: 3}
-    _GunTransform: {fileID: 0}
-    _Force: 50
-    _ParticleSystem: {fileID: 0}
-    _HitParticle: {fileID: 0}
+    _force: 500
+  gunshotFlash: {fileID: 0}
+  hitParticle: {fileID: 0}
+  _runningArmo: 0
 --- !u!1 &7701304728270173968
 GameObject:
   m_ObjectHideFlags: 0
@@ -539,12 +525,14 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _model:
     RechargeTime: 1
-    Armo: 0
+    Magazine: 0
+    reticle: {fileID: 0}
+    claimSize: 50
     ammunition: []
-    _GunTransform: {fileID: 0}
-    _Force: 500
-    _ParticleSystem: {fileID: 0}
-    _HitParticle: {fileID: 0}
+    _force: 500
+  gunshotFlash: {fileID: 0}
+  hitParticle: {fileID: 0}
+  _runningArmo: 0
 --- !u!114 &6869596081205333861
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -559,10 +547,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _model:
     _capacitance: 10
-    Power: 1
-    Energy: 10
-    ChargingDuration: 2
-    IsCharging: 0
+    power: 0
+    energy: 0
+    rechargingDuration: 2
 --- !u!1001 &2644391247391798279
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -927,7 +914,7 @@ PrefabInstance:
     - target: {fileID: 3144264181294545156, guid: 47ef12807f4c5a04fa2a7efd5e6674a1,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.5899999
+      value: 0.6
       objectReference: {fileID: 0}
     - target: {fileID: 3144264181294545156, guid: 47ef12807f4c5a04fa2a7efd5e6674a1,
         type: 3}
@@ -979,19 +966,8 @@ PrefabInstance:
       propertyPath: m_Name
       value: AK47
       objectReference: {fileID: 0}
-    - target: {fileID: 5234718772710856079, guid: 47ef12807f4c5a04fa2a7efd5e6674a1,
-        type: 3}
-      propertyPath: m_Enabled
-      value: 0
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 47ef12807f4c5a04fa2a7efd5e6674a1, type: 3}
---- !u!1 &4641222848821487406 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 4274423843393418324, guid: 47ef12807f4c5a04fa2a7efd5e6674a1,
-    type: 3}
-  m_PrefabInstance: {fileID: 8879165805313577850}
-  m_PrefabAsset: {fileID: 0}
 --- !u!4 &5808387725254552190 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 3144264181294545156, guid: 47ef12807f4c5a04fa2a7efd5e6674a1,

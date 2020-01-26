@@ -1165,6 +1165,7 @@ GameObject:
   - component: {fileID: 3144264181294545156}
   - component: {fileID: 5234718772710856079}
   - component: {fileID: 8755252604597483627}
+  - component: {fileID: 6869596080738731234}
   m_Layer: 0
   m_Name: AK47
   m_TagString: Untagged
@@ -1197,7 +1198,7 @@ Animator:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4274423843393418324}
-  m_Enabled: 1
+  m_Enabled: 0
   m_Avatar: {fileID: 0}
   m_Controller: {fileID: 9100000, guid: 37982c19c1c067b44b23068907d951fb, type: 2}
   m_CullingMode: 0
@@ -1223,11 +1224,35 @@ MonoBehaviour:
   _model:
     RechargeTime: 1
     Magazine: 30
+    reticle: {fileID: 0}
+    claimSize: 50
     _damage: 22
   gunshotFlash: {fileID: 8501813154947669034, guid: 5a9829715c585b84e93a6169d590ed00,
     type: 3}
-  _runningArmo: 0
   hitParticle: {fileID: 100010, guid: 031d08f52af1daa4f929b85221519426, type: 3}
+  _runningArmo: 0
+--- !u!114 &6869596080738731234
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4274423843393418324}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 486a2e577ed605c40b7c1dc5132b83fb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _model:
+    RechargeTime: 1
+    Magazine: 0
+    reticle: {fileID: 0}
+    claimSize: 50
+    ammunition: []
+    _force: 500
+  gunshotFlash: {fileID: 0}
+  hitParticle: {fileID: 0}
+  _runningArmo: 0
 --- !u!1 &4318189575660761834
 GameObject:
   m_ObjectHideFlags: 0

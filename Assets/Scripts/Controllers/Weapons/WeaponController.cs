@@ -29,6 +29,24 @@ namespace Shooter.Controllers.Weapons
         private float _delay;
         private Timer _rechargeTimer;
         private bool _isFire;
+        private bool _isRecharging;
+
+        #region properties
+
+        public bool CanFire() => _runningArmo > 0 && _rechargeTimer.IsStopped && !_isRecharging;
+
+        public bool NeedToReload => _runningArmo < Model.Magazine;
+
+        protected bool IsFire
+        {
+            get => _isFire;
+            set {
+                _isFire = value;
+                Animator.SetBool( "shoot", value );
+            }
+        }
+
+        #endregion
 
 
         #region initialization
@@ -37,6 +55,9 @@ namespace Shooter.Controllers.Weapons
             base.Awake();
 
             artilleryTube = Transform.Find( "GunT" );
+            var clip = Animator.runtimeAnimatorController.animationClips.First( c => c.name == "Reload" );
+            var animEvent = new AnimationEvent() { functionName = nameof( OnReloaded ) };
+            clip.AddEvent( animEvent );
         }
 
         protected virtual void Start()
@@ -46,22 +67,6 @@ namespace Shooter.Controllers.Weapons
             _runningArmo = Model.Magazine;
 
             gunshotFlash = Instantiate( gunshotFlash, this.artilleryTube );
-        }
-
-        #endregion
-
-
-        #region properties
-
-        public bool CanFire() => _runningArmo > 0 && _rechargeTimer.IsStopped;
-
-        protected bool IsFire
-        {
-            get => _isFire;
-            set {
-                _isFire = value;
-                Animator.SetBool( "shoot", value );
-            }
         }
 
         #endregion
@@ -91,15 +96,15 @@ namespace Shooter.Controllers.Weapons
         {
             if ( Model.reticle == null ) return;
 
-            int width = Model.reticle.width;
-            int height = Model.reticle.height;
+            int width = Mathf.Clamp(Model.reticle.width, 0, Model.claimSize );
+            int height = Mathf.Clamp(Model.reticle.height, 0, Model.claimSize );
 
-            float posX = Camera.pixelWidth / 2 - width / 2;
-            float posY = Camera.pixelHeight / 2 - height / 2;
+            int maxHalfSize = Model.claimSize / 2;
+            float posX = Camera.pixelWidth / 2 - maxHalfSize;
+            float posY = Camera.pixelHeight / 2 - maxHalfSize;
 
             GUI.Label( new Rect( posX, posY, width, height ), Model.reticle );
         }
-
 
         #endregion
 
@@ -131,14 +136,23 @@ namespace Shooter.Controllers.Weapons
             Activate();
         }
 
-        public void Recharge()
+        public void Reload()
         {
-            _runningArmo = Model.Magazine;
+            if ( NeedToReload ) {
+                _runningArmo = Model.Magazine;
+                Animator.SetTrigger( "reload" );
+                _isRecharging = true;
+            }
         }
 
         #endregion
 
 
         protected abstract bool TryFire( Fire fire );
+
+        protected virtual void OnReloaded()
+        {
+            _isRecharging = false;
+        }
     }
 }

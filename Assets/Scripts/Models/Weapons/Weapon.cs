@@ -11,9 +11,10 @@ namespace Shooter.Models.Weapons
     [ Serializable ]
     public class Weapon : IModel
     {
-        [RenameProperty("Init Recharge time in sec.")]
+        [RenameProperty("Init Reload time in sec.")]
         public float RechargeTime = 1;
         public int Magazine;
         public Texture reticle;
+        public int claimSize = 50;
     }
 }

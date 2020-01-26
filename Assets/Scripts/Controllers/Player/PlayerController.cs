@@ -45,7 +45,7 @@ namespace Shooter.Controllers
             }
 
             if ( Input.GetKeyDown( KeyCode.R )) {
-                BroadcastMessage( nameof(IWeaponControllerMessageTarget.Recharge) );
+                BroadcastMessage( nameof(IWeaponControllerMessageTarget.Reload) );
             }
 
             if ( Input.GetAxis( "Mouse ScrollWheel" ) > 0 ) {

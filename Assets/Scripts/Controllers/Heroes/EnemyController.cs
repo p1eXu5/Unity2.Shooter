@@ -5,24 +5,12 @@ using UnityEngine;
 
 namespace Shooter.Controllers.Heroes
 {
-    public class EnemyController : ControllerBase< Enemy >, ISetDamage
+    public class EnemyController< T > : ControllerBase< T >, ISetDamage
+        where T : Enemy, new()
     {
 
         [ SerializeField ]
-        private float _timeToDisappearance = 5f;
-
-        public void Update()
-        {
-            if ( Model.IsDead ) {
-                Color color = Color;
-
-
-                if ( color.a > 0 ) {
-                    color.a -= Model.Step / 100; 
-                    Color = color;
-                }
-            }
-        }
+        protected float timeToDisappearance = 5f;
 
 
 
@@ -33,26 +21,23 @@ namespace Shooter.Controllers.Heroes
             if ( Model.Hp > 0 )
             {
                 Model.Hp -= damage;
-            }
 
-            if ( Model.Hp <= 0 ) {
-                Model.Hp = 0;
-                Color = Color.red;
-                Model.IsDead = true;
-                StartCoroutine( Die() );
+                if ( Model.Hp <= 0 ) {
+                    Model.IsDead = true;
+                    OnHasDead();
+                    Model.Hp = 0;
+                }
             }
         }
 
         #endregion
 
-        private IEnumerator Die()
-        {
-            Destroy( GameObject.GetComponent< Collider >() );
-            Animator?.SetBool( "isDead", true );
+        /// <summary>
+        /// Do nothing.
+        /// </summary>
+        protected virtual void OnHasDead()
+        { }
 
-            yield return new WaitForSeconds( _timeToDisappearance );
-
-            Destroy( GameObject, 5f );
-        }
+        
     }
 }

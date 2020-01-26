@@ -12,6 +12,6 @@ namespace Shooter.Controllers.Weapons.Messages
         void ShowAway();
         void PullOut();
         void Fire( Fire fire );
-        void Recharge();
+        void Reload();
     }
 }

@@ -18,7 +18,7 @@ namespace Shooter.Controllers.Weapons
                     .TryGetComponent( typeof( Rigidbody ), out var newBullet );
 
                 if ( res ) {
-                    (( Rigidbody )newBullet).AddForce( artilleryTube.forward * Model.Force );
+                    (( Rigidbody )newBullet).AddForce( artilleryTube.forward * Model.Force, ForceMode.Impulse );
                     newBullet.gameObject.name = "Bullet";
 
                     return true;
