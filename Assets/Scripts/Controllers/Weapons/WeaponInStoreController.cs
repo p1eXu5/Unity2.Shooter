@@ -3,10 +3,14 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using AssemblyCSharp.Assets.Scripts;
 using Shooter.Controllers;
+using Shooter.Controllers.Weapons;
+using Shooter.Controllers.Weapons.Messages;
 using Shooter.Models;
+using Shooter.Models.Weapons;
 using Shooter.Views;
+using UnityEngine;
+using UnityEngine.EventSystems;
 
 namespace Shooter.Controllers
 {
@@ -15,40 +19,44 @@ namespace Shooter.Controllers
         
         private int _selectedWeapon;
 
-        private WeaponController[] _weaponControllers;
+        private IWeaponControllerMessageTarget[] _weaponControllers;
 
-        private WeaponController _selectedWeaponController => _weaponControllers[_selectedWeapon];
+        private IWeaponControllerMessageTarget SelectedWeaponController => _weaponControllers[_selectedWeapon];
 
 
         public int Count => _weaponControllers.Length;
 
         void Start()
         {
-            _weaponControllers = GetComponentsInChildren< WeaponController >( true ).Select( c => {
-                c.Disable(); return c;
-            } ).ToArray();
+            _weaponControllers = 
+                GetInChildren< IWeaponControllerMessageTarget >()
+                    .Select( c => { c.ShowAway(); return c; } )
+                    .ToArray();
 
-            _selectedWeaponController.Enable();
+            //BroadcastMessage( Messages.WeaponController.ShowAway );
+
+            var sw = SelectedWeaponController;
+            SelectedWeaponController.PullOut();
         }
 
         public void NextWeapon()
         {
             if ( _selectedWeapon == Count - 1 ) {
-                _changeWeapon( 0 );
+                ChangeWeapon( 0 );
                 return;
             }
 
-            _changeWeapon( _selectedWeapon + 1 );
+            ChangeWeapon( _selectedWeapon + 1 );
         }
 
         public void PrevWeapon()
         {
             if ( _selectedWeapon == 0 ) {
-                _changeWeapon( Count - 1 );
+                ChangeWeapon( Count - 1 );
                 return;
             }
 
-            _changeWeapon( _selectedWeapon - 1 );
+            ChangeWeapon( _selectedWeapon - 1 );
         }
 
         public void ChooseWeapon( int index )
@@ -68,19 +76,23 @@ namespace Shooter.Controllers
                 return;
             }
 
-            _changeWeapon( nextWeapon );
+            this.
+
+            ChangeWeapon( nextWeapon );
         }
 
-        private void _changeWeapon( int nextIndex )
+        private void ChangeWeapon( int nextIndex )
         {
-            _selectedWeaponController.Disable();
+            SelectedWeaponController.ShowAway();
+            Debug.Log( $"ShowAway #{_selectedWeapon}" );
             _selectedWeapon = nextIndex;
-            _selectedWeaponController.Enable();
+            SelectedWeaponController.PullOut();
+            Debug.Log( $"PullOut #{_selectedWeapon}" );
         }
 
         public void FireSelected( Fire fire = Fire.PrimaryFire )
         {
-            _selectedWeaponController.Fire( fire );
+            SelectedWeaponController.Fire( fire );
         }
     }
 }

@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Shooter.Controllers;
+using Shooter.Controllers.Weapons.Messages;
 using Shooter.Models;
 using Shooter.Views;
 using UnityEngine;
@@ -22,7 +23,7 @@ namespace Shooter.Controllers
         {
             base.Awake();
 
-            _flashlightController = GetComponentInChildren< FlashlightController >();
+            _flashlightController = GetComponentInChildren< FlashlightController >( true) ;
             _weaponsInStoreController = GetComponentInChildren< WeaponInStoreController >();
         }
 
@@ -36,11 +37,15 @@ namespace Shooter.Controllers
         void Update()
         {
             if ( Input.GetKeyDown( KeyCode.F )) {
-                _flashlightController.StartRecharge();
+                _flashlightController.StartRecharging();
             }
             if ( Input.GetKeyUp( KeyCode.F )) {
                 _flashlightController.ResetCharging();
                 _flashlightController.Toggle();
+            }
+
+            if ( Input.GetKeyDown( KeyCode.R )) {
+                BroadcastMessage( nameof(IWeaponControllerMessageTarget.Reload) );
             }
 
             if ( Input.GetAxis( "Mouse ScrollWheel" ) > 0 ) {

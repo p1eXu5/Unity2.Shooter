@@ -13,27 +13,86 @@ namespace Shooter.Views
     [RequireComponent(typeof(Animator))]
     public class FlashlightController : ControllerBase< Flashlight >
     {
-        private Animator _animator;
-
-        // ReSharper disable once ConvertToNullCoalescingCompoundAssignment
-        public Animator Animator => _animator ?? (_animator = GetComponent< Animator >() );
-
+        private float _runningEnergy;
         private bool _isCharging;
         private float _chargingTime;
 
-
+        #region properties
         private Light _Light => gameObject.GetComponentInChildren<Light>();
-
-
+        
         public float Energy
         {
-            get => Model.Energy;
+            get => Model.energy;
             set {
-                Model.Energy =  value < 0.0f ? 0.0f : value;
-                Animator.SetFloat( "energy", Model.Energy );
+                Model.energy =  value < 0.0f ? 0.0f : value;
+
+                float energy = Model.energy / Model.Capacitance;
+
+                Animator.SetFloat( "energy", energy * 10 );
+                
             }
         }
 
+        #endregion
+
+
+        #region initialization
+        void Start()
+        {
+            if ( Model.energy > Model.Capacitance ) {
+                Model.energy = Model.Capacitance;
+            }
+            Energy = Model.energy;
+        }
+
+        #endregion
+
+
+        #region activities
+        void Update()
+        {
+            if ( _isCharging) {
+                _chargingTime += Time.deltaTime;
+
+                if ( _chargingTime >= Model.rechargingDuration ) {
+                    Recharge();
+                    ResetCharging();
+                }
+            }
+
+            if ( Animator.GetBool( "isOn" ) ) {
+                Energy = Model.energy - Model.power * Time.deltaTime;
+            }
+        }
+
+        void FixedUpdate()
+        {
+            if ( Animator.GetBool( "isOn" ) ) {
+                float energy = Model.energy / Model.Capacitance;
+                Messenger<float>.Broadcast( "battery", energy );
+            }
+        }
+
+        private void OnDisable()
+        {
+            Messenger<float>.Broadcast( "battery", 0.0f );
+        }
+
+        private void OnEnable()
+        {
+            float energy = Model.energy / Model.Capacitance;
+            Messenger<float>.Broadcast( "battery", energy );
+        }
+
+
+
+
+
+
+        #endregion
+
+
+        #region methods
         public void Toggle()
         {
             if (Animator.GetBool("isOn")) {
@@ -45,51 +104,22 @@ namespace Shooter.Views
             
         }
 
-        public void SwitchOff()
+        public void Recharge()
         {
-            Animator.SetBool("isOn", false);
+            Energy = Model.Capacitance;
         }
 
-        public void StartRecharge()
+        public void StartRecharging()
         {
             _isCharging = true;
         }
-
-
 
         public void ResetCharging()
         {
             _isCharging = false;
             _chargingTime = 0.0f;
         }
-
-        public void Charge()
-        {
-            Energy = Model.Capacitance;
-        }
-
-
-        void Start()
-        {
-            if ( Model.Energy > Model.Capacitance ) {
-                Model.Energy = Model.Capacitance;
-            }
-        }
-
-        void Update()
-        {
-            if ( _isCharging) {
-                _chargingTime += Time.deltaTime;
-
-                if ( _chargingTime >= Model.ChargingDuration ) {
-                    Charge();
-                    ResetCharging();
-                }
-            }
-
-            if ( Animator.GetBool( "isOn" ) ) {
-                Energy = Model.Energy - Model.Power * Time.deltaTime;
-            }
-        }
+        
+        #endregion
     }
 }

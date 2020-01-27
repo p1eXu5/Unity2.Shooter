@@ -3,13 +3,13 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using AssemblyCSharp.Assets.Scripts.Controllers.Heroes;
 using Shooter.Contracts;
+using Shooter.Controllers;
 using Shooter.Heroes;
 using Shooter.Models.Ammunition;
 using UnityEngine;
 
-namespace Shooter.Views
+namespace Shooter.Controllers.Ammunition
 {
     public class BulletController : ControllerBase< Bullet >
     {
@@ -19,7 +19,7 @@ namespace Shooter.Views
             base.Awake();
 
             // 	self-destructing
-            Destroy( Instance, Model.TimeToDestruct );
+            Destroy( GameObject, Model.TimeToDestruct );
 
             _currentDamage = Model.Damage;
             Rigidbody.mass = Model.Mass;
@@ -27,14 +27,19 @@ namespace Shooter.Views
 
         private void OnCollisionEnter( Collision collision )
         {
+            if ( collision.gameObject.tag == "Player" ) return;
+
             var comp = collision.gameObject.GetComponent< ISetDamage >();
             if ( comp == null ) {
                 comp = collision.gameObject.GetComponentInParent< ISetDamage >();
             }
 
-            _setDamage( comp );
+            if ( comp != null ) {
+                _setDamage( comp );
+            }
 
-            Destroy( Instance );
+            Destroy( GameObject, 1 );
+            return;
         }
 
         private void _setDamage( ISetDamage obj )

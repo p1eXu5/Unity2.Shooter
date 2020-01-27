@@ -1,6 +1,8 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using Shooter.Helpers;
 using UnityEngine;
 // ReSharper disable CheckNamespace
 
@@ -9,53 +11,41 @@ namespace Shooter
     public abstract class BaseObject : MonoBehaviour
     {
         #region fields
-
-        protected Camera _MainCamera;
-        protected Animator _Animator;
-
         private bool _isVisible;
 
         #endregion
 
 
         #region properties
+        public GameObject GameObject { get; private set; }
+        public Camera Camera { get; private set; }
+        public Animator Animator { get; private set; }
 
-        public GameObject Instance { get; protected set; }
 
-        public Transform Transform => Instance.transform;
-
-
-        public Rigidbody Rigidbody { get; protected set; }
-
-        public string Name
+        public Transform Transform => GameObject.transform;
+        public Vector3 Position
         {
-            get => Instance.name;
-            set => Instance.name = value;
+            get => Transform.position;
+            set => Transform.position = value;
         }
-
-        public int Layer
+        public Vector3 Scale
         {
-            get => Instance.layer;
-            set {
-                var inst = Instance;
-                inst.layer = value;
-                AskLayer( inst.transform, inst.layer );
-            }
+            get => Transform.localScale;
+            set => Transform.localScale = value;
         }
-
-        private void AskLayer( Transform obj, int layer )
+        public Quaternion Rotation
         {
-            foreach ( Transform child in obj ) {
-                AskLayer( child, layer );
-            }
+            get => Transform.rotation;
+            set => Transform.rotation = value;
         }
 
 
-        public Material Material => Instance.GetComponent<Renderer>().material;
-
+        public Rigidbody Rigidbody { get; private set; }
+        public Renderer Renderer { get; private set; }
+        public Material Material => Renderer?.material;
         public Color Color
         {
-            get => Material.color;
+            get => Material?.color ?? Colors.Default;
             set {
                 var material = Material;
                 if ( material ) {
@@ -64,52 +54,29 @@ namespace Shooter
             }
         }
 
-        private void AskColor( Transform obj, Color color )
+
+        public string Name
         {
-            // ReSharper disable once LocalVariableHidesMember
-            var renderer = obj.GetComponent<Renderer>();
-            if ( renderer ) {
-                if ( renderer.material ) {
-                    renderer.material.color = color;
-                }
+            get => GameObject.name;
+            set => GameObject.name = value;
+        }
+        public int Layer
+        {
+            get => GameObject.layer;
+            set {
+                var inst = GameObject;
+                inst.layer = value;
+                AskLayer( inst.transform, inst.layer );
             }
-            foreach ( Transform child in obj ) {
-                AskColor( child, color );
-            }
         }
-
-        public Vector3 Position
-        {
-            get => Transform.position;
-            set => Transform.position = value;
-        }
-
-        public Vector3 Scale
-        {
-            get => Transform.localScale;
-            set => Transform.localScale = value;
-        }
-
-        public Quaternion Rotation
-        {
-            get => Transform.rotation;
-            set => Transform.rotation = value;
-        }
-
         public bool IsVisible
         {
             get => _isVisible;
             set {
                 _isVisible = value;
-                var inst = Instance;
-                MeshRenderer r;
-                if ( (r = inst.GetComponent<MeshRenderer>()) != null ) {
-                    r.enabled = _isVisible;
-                }
 
-                SkinnedMeshRenderer s;
-                if ( (s = inst.GetComponent<SkinnedMeshRenderer>()) != null ) {
-                    s.enabled = _isVisible;
+                if ( Renderer ) {
+                    Renderer.enabled = value;
                 }
             }
         }
@@ -118,18 +85,88 @@ namespace Shooter
 
 
         #region activities
-
         protected virtual void Awake()
         {
-            Instance = gameObject;
-            _MainCamera = Camera.main;
+            GameObject = gameObject;
+            Camera = Camera.main;
 
-            if ( GetComponent< Rigidbody >() ) {
-                Rigidbody = GetComponent< Rigidbody >();
+            TryCacheComponent< Rigidbody >( c => Rigidbody = c );
+            TryCacheComponent< Animator >( c => Animator = c );
+            TryCacheComponent< Renderer >( c => Renderer = c );
+        }
+
+        #endregion
+
+
+        #region methods
+        public virtual void Activate()
+        {
+            gameObject.SetActive( true );
+        }
+        public virtual void Deactivate()
+        {
+            gameObject.SetActive( false );
+        }
+
+
+        public IEnumerable<Transform> GetChildrenTransforms()
+        {
+            for (int i = 0; i < transform.childCount; i++) {
+                yield return transform.GetChild( i );
             }
+        }
+        public IEnumerable<T> GetInChildren<T>()
+        {
+            for (int i = 0; i < transform.childCount; i++) {
+                yield return transform.GetChild( i ).gameObject.GetComponent<T>();
+            }
+        }
 
-            if ( GetComponent< Animator>() ) {
-                _Animator = GetComponent< Animator>();
+
+        protected void TryCacheComponent<T>( Action<T> propertySetter )
+            where T : Component
+        {
+            T comp = GetComponent<T>();
+            propertySetter( comp ? comp : null );
+        }
+        protected void TryCacheComponentInChildren<T>( Action<T> propertySetter )
+            where T : Component
+        {
+            T comp = Transform.GetComponentInChildren< T >();
+            propertySetter( comp ? comp : null );
+        }
+        protected void FindOrCreateComponent<T>( string componentName, Action<T> propertySetter )
+            where T : Component
+        {
+            var obj = GameObject.Find( "BatteryProgressBar" );
+            if ( obj ) {
+
+                T comp = obj.GetComponent<T>();
+                if ( !comp ) {
+                    comp = obj.AddComponent<T>();
+                }
+
+                propertySetter( comp );
+            }
+        }
+
+        private void AskLayer( Transform obj, int layer )
+        {
+            foreach (Transform child in obj) {
+                AskLayer( child, layer );
+            }
+        }
+        private void AskColor( Transform obj, Color color )
+        {
+            // ReSharper disable once LocalVariableHidesMember
+            var renderer = obj.GetComponent<Renderer>();
+            if (renderer) {
+                if (renderer.material) {
+                    renderer.material.color = color;
+                }
+            }
+            foreach (Transform child in obj) {
+                AskColor( child, color );
             }
         }
 
