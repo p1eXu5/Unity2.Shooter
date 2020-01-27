@@ -55,9 +55,11 @@ namespace Shooter.Controllers.Weapons
             base.Awake();
 
             artilleryTube = Transform.Find( "GunT" );
-            var clip = Animator.runtimeAnimatorController.animationClips.First( c => c.name == "Reload" );
-            var animEvent = new AnimationEvent() { functionName = nameof( OnReloaded ) };
-            clip.AddEvent( animEvent );
+            var clip = Animator?.runtimeAnimatorController.animationClips.FirstOrDefault( c => c.name == "Reload" );
+            if ( clip != null ) {
+                var animEvent = new AnimationEvent() { functionName = nameof( OnReloaded ) };
+                clip.AddEvent( animEvent );
+            }
         }
 
         protected virtual void Start()
@@ -66,7 +68,7 @@ namespace Shooter.Controllers.Weapons
             _delay = Model.RechargeTime;
             _runningArmo = Model.Magazine;
 
-            gunshotFlash = Instantiate( gunshotFlash, this.artilleryTube );
+            //gunshotFlash = Instantiate( gunshotFlash, this.artilleryTube );
         }
 
         #endregion

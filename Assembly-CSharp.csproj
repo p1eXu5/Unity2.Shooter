@@ -178,6 +178,7 @@
     <Compile Include="Assets\Scripts\Controllers\Heroes\EnemyController.cs" />
     <Compile Include="Assets\Scripts\Controllers\Heroes\MobileEnemyController.cs" />
     <Compile Include="Assets\Scripts\Controllers\Heroes\StaticEnemyController.cs" />
+    <Compile Include="Assets\Scripts\Controllers\Heroes\WaypointPathController.cs" />
     <Compile Include="Assets\Scripts\Controllers\Messages.cs" />
     <Compile Include="Assets\Scripts\Controllers\Player\PlayerController.cs" />
     <Compile Include="Assets\Scripts\Controllers\Weapons\BallisticWeaponController.cs" />

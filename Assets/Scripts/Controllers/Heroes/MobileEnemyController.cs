@@ -8,18 +8,47 @@ using Shooter.Controllers.Heroes;
 using Shooter.Models.Heroes;
 using UnityEngine;
 using UnityEngine.AI;
+using UnityEditor;
 
 namespace Shooter.Controllers.Heroes
 {
     [ RequireComponent( typeof(NavMeshAgent))]
     public class MobileEnemyController : EnemyController< Enemy >
     {
+        #region fields
+
         private NavMeshAgent _agent;
         private Transform _playerPos;
         private float _groundChkDistance = 0.1f;
 
         private bool _grounded;
-        private int _stoppingDistance = 3;
+        private int _stoppingDistance = 5;
+        private int _activeDistance = 10;
+
+        [SerializeField] List<Vector3> _wayPoints = new List<Vector3>();
+        private int _wayCounter;
+        private GameObject _wayPointMain;
+
+        [SerializeField] private float _timeWait = 2f;
+        [SerializeField] private float _timeOut;
+
+        [SerializeField] private bool patrol;
+        [SerializeField] private bool shooting;
+        [SerializeField] private bool isTarget;
+
+
+        // gun
+        [SerializeField] private List<Transform> _visibleTargets = new List<Transform>();
+
+        [SerializeField] private float _maxAngle = 30;
+        [SerializeField] private float _maxRadius = 20;
+
+        [SerializeField] private LayerMask _targetMask;
+        [SerializeField] private LayerMask _obstacleMask;
+
+        [SerializeField] private int _dalay = 1;
+
+        #endregion
 
 
         #region properties
@@ -40,6 +69,21 @@ namespace Shooter.Controllers.Heroes
             _agent.updateRotation = true;
 
             _playerPos = GameObject.FindGameObjectWithTag( "Player" ).transform;
+
+            _wayPointMain = GameObject.FindWithTag( "Waypoints" );
+
+            foreach ( Transform trfm in _wayPointMain.transform ) {
+                _wayPoints.Add( trfm.position );
+            }
+
+            patrol = true;
+
+        }
+
+        void Start()
+        {
+            Debug.Log( "pre coroutine" );
+            StartCoroutine( nameof(FindTargets), 0.1f );
         }
 
         #endregion
@@ -49,10 +93,17 @@ namespace Shooter.Controllers.Heroes
 
         void Update()
         {
+            if ( _visibleTargets.Count > 0 ) {
+                patrol = false;
+            }
+            else {
+                patrol = true;
+            }
+
             if ( !Model.IsDead ) {
 
-                _agent.SetDestination( _playerPos.position );
-                _agent.stoppingDistance = _stoppingDistance;
+                //_agent.SetDestination( _playerPos.position );
+                //_agent.stoppingDistance = _stoppingDistance;
 
                 if ( _agent.remainingDistance > _agent.stoppingDistance ) {
                     //Move( _agent.desiredVelocity );
@@ -63,6 +114,41 @@ namespace Shooter.Controllers.Heroes
                     Animator.SetBool( "move", false );
                 }
             }
+
+            if ( patrol ) 
+            {
+                if ( _wayPoints.Count >= 2 )
+                {
+                    _agent.stoppingDistance = 0;
+                    _agent.SetDestination( _wayPoints[_wayCounter] );
+
+                    if ( !_agent.hasPath )
+                    {
+                        _timeOut += 0.1f;
+                        if ( _timeOut > _timeWait ) {
+                            _timeOut = 0;
+                            ChangeWaypoint();
+                        }
+                    }
+                }
+                else {
+                    _agent.stoppingDistance = _activeDistance;
+                    _agent.SetDestination( _playerPos.position );
+                }
+            }
+            else {
+                _agent.stoppingDistance = _activeDistance;
+            }
+        }
+
+
+        void OnDrawGizmos()
+        {
+            Vector3 pos = transform.position + Vector3.up;
+
+            Handles.color = new Color(1, 0, 1, 0.1f);
+            Handles.DrawSolidArc( pos, Vector3.up, transform.forward,  _maxAngle, _maxRadius );
+            Handles.DrawSolidArc( pos, Vector3.up, transform.forward,  -_maxAngle, _maxRadius );
         }
 
         #endregion
@@ -116,6 +202,49 @@ namespace Shooter.Controllers.Heroes
             }
             else {
                 _grounded = false;
+            }
+        }
+
+        private void FindVisibleTarget()
+        {
+            _visibleTargets.Clear();
+            Collider[] targetsInRadius = Physics.OverlapSphere( Position, _maxRadius, _targetMask );
+
+            for (int i = 0; i < targetsInRadius.Length; i++) 
+            {
+                Transform target = targetsInRadius[i].transform;
+                Vector3 dirToTarget = (target.position - Position).normalized;
+                float targetAngle = Vector3.Angle( transform.forward, dirToTarget );
+
+                if ( -_maxAngle < targetAngle && targetAngle < _maxAngle )
+                {
+                    float distToTarget = Vector3.Distance( Position, target.position );
+
+                    if ( Physics.Raycast( (transform.position + Vector3.up), dirToTarget, _obstacleMask ))
+                    {
+                        if ( !_visibleTargets.Contains( target ) ) {
+                            _visibleTargets.Add( target );
+                        }
+                    }
+                }
+            }
+        }
+
+        private IEnumerable FindTargets( float delay )
+        {
+            Debug.Log( "cor" );
+            while ( true )
+            {
+                yield return new WaitForSeconds( _dalay );
+                FindVisibleTarget();
+            }
+        }
+
+        private void ChangeWaypoint()
+        {
+            ++_wayCounter;
+            if ( _wayCounter >= _wayPoints.Count ) {
+                _wayCounter = 0;
             }
         }
 
