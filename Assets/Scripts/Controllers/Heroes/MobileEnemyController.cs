@@ -78,11 +78,6 @@ namespace Shooter.Controllers.Heroes
 
             patrol = true;
 
-        }
-
-        void Start()
-        {
-            Debug.Log( "pre coroutine" );
             StartCoroutine( nameof(FindTargets), 0.1f );
         }
 
@@ -220,7 +215,7 @@ namespace Shooter.Controllers.Heroes
                 {
                     float distToTarget = Vector3.Distance( Position, target.position );
 
-                    if ( Physics.Raycast( (transform.position + Vector3.up), dirToTarget, _obstacleMask ))
+                    if ( !Physics.Raycast( (transform.position + Vector3.up), dirToTarget, _obstacleMask ))
                     {
                         if ( !_visibleTargets.Contains( target ) ) {
                             _visibleTargets.Add( target );
@@ -230,9 +225,9 @@ namespace Shooter.Controllers.Heroes
             }
         }
 
-        private IEnumerable FindTargets( float delay )
+        private IEnumerator FindTargets( float delay )
         {
-            Debug.Log( "cor" );
+            Debug.Log( "coroutine" );
             while ( true )
             {
                 yield return new WaitForSeconds( _dalay );
