@@ -140,7 +140,7 @@ namespace Shooter.Controllers.Heroes
                 Vector3 pos = transform.position + Vector3.up;
                 Ray ray = new Ray(pos, transform.forward);
                 RaycastHit hit;
-                Debug.DrawRay( ray.origin, ray.direction, Color.green );
+                Debug.DrawRay( ray.origin, ray.direction * _shootDistance, Color.green );
 
                 if ( Physics.Raycast( ray, out hit, _shootDistance, _targetMask ))
                 {
