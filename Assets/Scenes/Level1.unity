@@ -16879,6 +16879,21 @@ PrefabInstance:
       propertyPath: _maxRadius
       value: 20
       objectReference: {fileID: 0}
+    - target: {fileID: 2600017246869069331, guid: 5e6ca95de9940ad4581f1215a85a3947,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 1.3906
+      objectReference: {fileID: 0}
+    - target: {fileID: 2600017246869069331, guid: 5e6ca95de9940ad4581f1215a85a3947,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0.3686
+      objectReference: {fileID: 0}
+    - target: {fileID: 2600017246869069331, guid: 5e6ca95de9940ad4581f1215a85a3947,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 1.189
+      objectReference: {fileID: 0}
     - target: {fileID: 2768594413573829048, guid: 5e6ca95de9940ad4581f1215a85a3947,
         type: 3}
       propertyPath: m_LocalRotation.x
@@ -21031,6 +21046,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: SciFiWarriorHP
+      objectReference: {fileID: 0}
+    - target: {fileID: 7725745696916604751, guid: 5e6ca95de9940ad4581f1215a85a3947,
+        type: 3}
+      propertyPath: _model.Magazine
+      value: 30
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 5e6ca95de9940ad4581f1215a85a3947, type: 3}

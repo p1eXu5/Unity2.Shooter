@@ -42,7 +42,7 @@ namespace Shooter.Controllers.Weapons
             get => _isFire;
             set {
                 _isFire = value;
-                Animator.SetBool( "shoot", value );
+                Animator?.SetBool( "shoot", value );
             }
         }
 

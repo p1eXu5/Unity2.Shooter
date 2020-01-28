@@ -5,6 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Shooter.Controllers.Heroes;
+using Shooter.Controllers.Weapons.Messages;
 using Shooter.Models.Heroes;
 using UnityEngine;
 using UnityEngine.AI;
@@ -35,6 +36,7 @@ namespace Shooter.Controllers.Heroes
         [SerializeField] private bool patrol;
         [SerializeField] private bool shooting;
         [SerializeField] private bool isTarget;
+        [SerializeField] private float _shootDistance = 1000f;
 
 
         // gun
@@ -133,6 +135,25 @@ namespace Shooter.Controllers.Heroes
             }
             else {
                 _agent.stoppingDistance = _activeDistance;
+
+                // shoot
+                Vector3 pos = transform.position + Vector3.up;
+                Ray ray = new Ray(pos, transform.forward);
+                RaycastHit hit;
+                Debug.DrawRay( ray.origin, ray.direction, Color.green );
+
+                if ( Physics.Raycast( ray, out hit, _shootDistance, _targetMask ))
+                {
+                    if ( hit.collider.tag == "Player" && !shooting )
+                    {
+                        // Shoot; -> hit
+                        shooting = true;
+                        StartCoroutine( nameof( Shoot ) );
+                    }
+                }
+                else {
+                    return;
+                }
             }
         }
 
@@ -223,6 +244,15 @@ namespace Shooter.Controllers.Heroes
                     }
                 }
             }
+        }
+
+        IEnumerator Shoot()
+        {
+            yield return new WaitForSeconds( 0.5f );
+            Animator.SetBool( "shoot", shooting );
+            BroadcastMessage( nameof( IWeaponControllerMessageTarget.Fire ), Fire.PrimaryFire );
+            shooting = false;
+            Animator.SetBool( "shoot", shooting );
         }
 
         private IEnumerator FindTargets( float delay )
