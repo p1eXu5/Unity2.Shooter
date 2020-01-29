@@ -178,9 +178,11 @@
     <Compile Include="Assets\Scripts\Controllers\Heroes\EnemyController.cs" />
     <Compile Include="Assets\Scripts\Controllers\Heroes\MobileEnemyController.cs" />
     <Compile Include="Assets\Scripts\Controllers\Heroes\StaticEnemyController.cs" />
+    <Compile Include="Assets\Scripts\Controllers\Heroes\WaypointPathController.cs" />
     <Compile Include="Assets\Scripts\Controllers\Messages.cs" />
     <Compile Include="Assets\Scripts\Controllers\Player\PlayerController.cs" />
     <Compile Include="Assets\Scripts\Controllers\Weapons\BallisticWeaponController.cs" />
+    <Compile Include="Assets\Scripts\Controllers\Weapons\EnemyLaserWeaponController.cs" />
     <Compile Include="Assets\Scripts\Controllers\Weapons\LaserWeaponController.cs" />
     <Compile Include="Assets\Scripts\Controllers\Weapons\Messages\IWeaponControllerMessageTarget.cs" />
     <Compile Include="Assets\Scripts\Controllers\Weapons\WeaponController.cs" />
@@ -204,6 +206,7 @@
     <Compile Include="Assets\Scripts\Models\Weapons\LaserWeapon.cs" />
     <Compile Include="Assets\Scripts\Models\Weapons\Weapon.cs" />
     <Compile Include="Assets\Scripts\ObjectManager.cs" />
+    <Compile Include="Assets\Scripts\Spawner.cs" />
     <Compile Include="Assets\Scripts\Timer.cs" />
     <None Include="Assets\DownloadedAssets\Standard Assets\Effects\GlassRefraction\Shaders\GlassStainedBumpDistort.shader" />
     <None Include="Assets\Shaders\NewImageEffectShader.shader" />
@@ -218,6 +221,7 @@
     <None Include="Assets\DownloadedAssets\Standard Assets\Vehicles\Car\Shaders\DiffuseReflectiveShader.shader" />
     <None Include="Assets\DownloadedAssets\Standard Assets\Environment\Water\Water4\Shaders\FXWater4Simple.shader" />
     <None Include="Assets\DownloadedAssets\Standard Assets\Vehicles\Aircraft\AircraftGuidelines.txt" />
+    <None Include="Assets\EditorDataXml.xml" />
     <None Include="Assets\DownloadedAssets\Standard Assets\Vehicles\Car\Shaders\ReflectiveDiffuseSpecTransp.shader" />
     <None Include="Assets\DownloadedAssets\Standard Assets\Effects\ToonShading\Shaders\ToonBasicOutline.shader" />
     <None Include="Assets\DownloadedAssets\Standard Assets\ParticleSystems\Shaders\PriorityParticleAlpha.shader" />

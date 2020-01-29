@@ -36,7 +36,7 @@ namespace Shooter.Controllers.Weapons
             return true;
         }
 
-        private bool _trySetDamage( Collider collider )
+        protected bool _trySetDamage( Collider collider )
         {
             var damageable = collider.GetComponent<ISetDamage>();
 
@@ -48,7 +48,7 @@ namespace Shooter.Controllers.Weapons
             return  false;
         }
 
-        private void _createHitParticle( RaycastHit hit )
+        protected void _createHitParticle( RaycastHit hit )
         {
             GameObject particle = Instantiate( hitParticle, hit.point, Quaternion.identity );
             particle.transform.parent = hit.transform;

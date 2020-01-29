@@ -16,5 +16,7 @@ namespace Shooter.Models.Weapons
         public int Magazine;
         public Texture reticle;
         public int claimSize = 50;
+
+        [SerializeField] private float _shootDistance = 1000f;
     }
 }
