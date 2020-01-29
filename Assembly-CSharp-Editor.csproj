@@ -69,6 +69,8 @@
     <Compile Include="Assets\DownloadedAssets\Standard Assets\Editor\Water\Water4\SpecularLightingEditor.cs" />
     <Compile Include="Assets\DownloadedAssets\Standard Assets\Editor\Water\Water4\WaterBaseEditor.cs" />
     <Compile Include="Assets\DownloadedAssets\Standard Assets\Editor\Water\Water4\WaterEditorUtility.cs" />
+    <Compile Include="Assets\Editor\Window.cs" />
+    <Compile Include="Assets\Editor\XmlSaviour.cs" />
     <Reference Include="UnityEditor.TestRunner">
       <HintPath>D:/Projects/Programming/CSharp/_unity/_learning/Unity2/Lesson1/Shooter/Library/ScriptAssemblies/UnityEditor.TestRunner.dll</HintPath>
     </Reference>

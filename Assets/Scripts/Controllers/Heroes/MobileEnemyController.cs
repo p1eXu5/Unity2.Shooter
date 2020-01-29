@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -42,13 +41,25 @@ namespace Shooter.Controllers.Heroes
         // gun
         [SerializeField] private List<Transform> _visibleTargets = new List<Transform>();
 
-        [SerializeField] private float _maxAngle = 30;
-        [SerializeField] private float _maxRadius = 20;
+        [Header("Угол обзора")]
+        [ContextMenuItem("Random value", nameof(Randomize))]
+        [Range(30, 90)]
+        [SerializeField] 
+        private float _maxAngle = 30;
 
+        [Range(10, 40)]
+        [SerializeField] 
+        private float _maxRadius = 20;
+
+        [Space(18)]
         [SerializeField] private LayerMask _targetMask;
         [SerializeField] private LayerMask _obstacleMask;
 
         [SerializeField] private int _dalay = 1;
+
+        //[Multiline(10)]
+        [TextArea(5, 10) ]
+        public string TEST;
 
         #endregion
 
@@ -61,6 +72,13 @@ namespace Shooter.Controllers.Heroes
 
 
         #region initialization
+
+
+        private void Randomize()
+        {
+            _maxAngle = Random.Range(30, 90);
+            _maxRadius = Random.Range( 10, 40 );
+        }
 
         protected override void Awake()
         {
