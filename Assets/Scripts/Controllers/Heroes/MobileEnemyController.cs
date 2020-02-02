@@ -57,9 +57,15 @@ namespace Shooter.Controllers.Heroes
 
         [SerializeField] private int _dalay = 1;
 
+        [SerializeField] private Transform _target;
+
+
         //[Multiline(10)]
         [TextArea(5, 10) ]
         public string TEST;
+
+        [SerializeField] float _turnAmount;
+        [SerializeField] float _stTurnSpeed = 1;
 
         #endregion
 
@@ -110,6 +116,10 @@ namespace Shooter.Controllers.Heroes
         {
             if ( _visibleTargets.Count > 0 ) {
                 patrol = false;
+                _target = _visibleTargets[0];
+                if ( Vector3.Distance( Position, _target.position ) > _maxRadius ) {
+                    _visibleTargets.Clear();
+                }
             }
             else {
                 patrol = true;
@@ -153,6 +163,7 @@ namespace Shooter.Controllers.Heroes
             }
             else {
                 _agent.stoppingDistance = _activeDistance;
+                _agent.SetDestination( _target.position );
 
                 // shoot
                 Vector3 pos = transform.position + Vector3.up;
@@ -160,17 +171,32 @@ namespace Shooter.Controllers.Heroes
                 RaycastHit hit;
                 Debug.DrawRay( ray.origin, ray.direction * _shootDistance, Color.green );
 
+                Vector3 dirToTarget = (_target.position - Position).normalized;
+                transform.rotation = Quaternion.Slerp( transform.rotation, Quaternion.LookRotation( dirToTarget ), 30 * Time.deltaTime );
+
                 if ( Physics.Raycast( ray, out hit, _shootDistance, _targetMask ))
                 {
                     if ( hit.collider.tag == "Player" && !shooting )
                     {
+                        _agent.ResetPath();
+                        Move( Vector3.zero );
+
                         // Shoot; -> hit
                         shooting = true;
                         StartCoroutine( nameof( Shoot ) );
                     }
+                    else {
+                        if ( _target ) {
+                            _stoppingDistance = 2;
+                            _agent.SetDestination( _target.position );
+                        }
+                        return;
+                    }
                 }
                 else {
-                    return;
+                    if ( _target ) {
+                        _agent.SetDestination( _target.position );
+                    }
                 }
             }
         }
@@ -198,6 +224,9 @@ namespace Shooter.Controllers.Heroes
 
             move = transform.InverseTransformDirection( move );
             CheckGroundStatus();
+
+            _turnAmount = Mathf.Atan2( move.x, move.z );
+            transform.Rotate( 0, _turnAmount * _stTurnSpeed * Time.deltaTime, 0 );
         }
 
         protected override void OnHasDead()
@@ -241,7 +270,7 @@ namespace Shooter.Controllers.Heroes
 
         private void FindVisibleTarget()
         {
-            _visibleTargets.Clear();
+            // _visibleTargets.Clear();
             Collider[] targetsInRadius = Physics.OverlapSphere( Position, _maxRadius, _targetMask );
 
             for (int i = 0; i < targetsInRadius.Length; i++) 

@@ -168,6 +168,7 @@
     <Compile Include="Assets\SampleScenes\Scripts\SlowMoButton.cs" />
     <Compile Include="Assets\Scripts\BaseObject.cs" />
     <Compile Include="Assets\Scripts\Colors.cs" />
+    <Compile Include="Assets\Scripts\Contracts\IDataSaver.cs" />
     <Compile Include="Assets\Scripts\Contracts\ISetDamage.cs" />
     <Compile Include="Assets\Scripts\Controllers\Ammunition\BulletController.cs" />
     <Compile Include="Assets\Scripts\Controllers\ControllerBase.cs" />
@@ -180,6 +181,7 @@
     <Compile Include="Assets\Scripts\Controllers\Heroes\StaticEnemyController.cs" />
     <Compile Include="Assets\Scripts\Controllers\Heroes\WaypointPathController.cs" />
     <Compile Include="Assets\Scripts\Controllers\Messages.cs" />
+    <Compile Include="Assets\Scripts\Controllers\MiniMapController.cs" />
     <Compile Include="Assets\Scripts\Controllers\Player\PlayerController.cs" />
     <Compile Include="Assets\Scripts\Controllers\Weapons\BallisticWeaponController.cs" />
     <Compile Include="Assets\Scripts\Controllers\Weapons\EnemyLaserWeaponController.cs" />
@@ -206,6 +208,9 @@
     <Compile Include="Assets\Scripts\Models\Weapons\LaserWeapon.cs" />
     <Compile Include="Assets\Scripts\Models\Weapons\Weapon.cs" />
     <Compile Include="Assets\Scripts\ObjectManager.cs" />
+    <Compile Include="Assets\Scripts\Serialization\JsonData.cs" />
+    <Compile Include="Assets\Scripts\Serialization\StreamData.cs" />
+    <Compile Include="Assets\Scripts\Serialization\XmlData.cs" />
     <Compile Include="Assets\Scripts\Spawner.cs" />
     <Compile Include="Assets\Scripts\Timer.cs" />
     <None Include="Assets\DownloadedAssets\Standard Assets\Effects\GlassRefraction\Shaders\GlassStainedBumpDistort.shader" />
@@ -247,6 +252,7 @@
     <None Include="Assets\DownloadedAssets\Standard Assets\Characters\RollerBall\RollerBallGuidelines.txt" />
     <None Include="Assets\DownloadedAssets\Standard Assets\ParticleSystems\Shaders\PriorityParticleAdd.shader" />
     <None Include="Assets\DownloadedAssets\Standard Assets\Effects\TessellationShaders\Shaders\BumpedSpecularDisplacement.shader" />
+    <None Include="Assets\JsonData.xml" />
     <None Include="Assets\SampleScenes\Shaders\Skybox-Procedural.shader" />
     <None Include="Assets\Shaders\NewSurfaceShader.shader" />
     <Reference Include="Unity.Timeline.Editor">
