@@ -43,7 +43,7 @@ namespace Shooter.Controllers
             _dataSaver.Save( Model );
 
             Player player = _dataSaver.Load();
-            Debug.Log( player );
+            // Debug.Log( player );
 
             //PlayerPrefs.SetString( "Name", name );
             //PlayerPrefs.SetInt( "Health", Model.Health );

@@ -21,18 +21,17 @@ namespace Shooter.Controllers.Weapons
 
         protected override bool TryFire( Fire fire )
         {
-            RaycastHit hit;
-            Ray ray = new Ray( artilleryTube.transform.position, artilleryTube.transform.forward );
+            Ray ray = new Ray( transform.position, transform.forward );
 
-            if ( Physics.Raycast( ray, out hit, _targetMask )) {
+            if ( Physics.Raycast( ray, out var hit, _targetMask )) {
 
-                var collider = hit.collider;
+                Debug.Log( hit.collider.name );
 
                 _createHitParticle( hit );
 
-                if ( collider.tag == "Player" ) {
+                if ( hit.collider.tag == "Player" ) {
 
-                    _trySetDamage( collider );
+                    _trySetDamage( hit.collider );
                 }
             }
 
