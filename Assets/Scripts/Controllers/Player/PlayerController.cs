@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using AssemblyCSharp.Assets.Scripts.Contracts;
+using AssemblyCSharp.Assets.Scripts.Serialization;
 using Shooter.Contracts;
 using Shooter.Controllers;
 using Shooter.Controllers.Weapons.Messages;
@@ -18,6 +20,8 @@ namespace Shooter.Controllers
         private FlashlightController _flashlightController;
         private WeaponInStoreController _weaponsInStoreController;
 
+        private IDataSaver _dataSaver;
+
 
         // called right after been instantiated before View assignment
         protected override void Awake()
@@ -30,7 +34,26 @@ namespace Shooter.Controllers
 
         void Start()
         {
+            _dataSaver = new JsonData();
 
+            Model.Health = 100;
+            Model.Visible = IsVisible;
+            Model.Name = name;
+
+            _dataSaver.Save( Model );
+
+            Player player = _dataSaver.Load();
+            Debug.Log( player );
+
+            //PlayerPrefs.SetString( "Name", name );
+            //PlayerPrefs.SetInt( "Health", Model.Health );
+            //PlayerPrefs.Save();
+
+            //Debug.Log( PlayerPrefs.GetString( "Name" ) );
+
+            //PlayerPrefs.DeleteAll();
+
+            //Debug.Log( PlayerPrefs.GetString( "Name" ) );
         }
 
         

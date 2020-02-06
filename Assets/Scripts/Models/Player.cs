@@ -14,7 +14,9 @@ namespace Shooter.Models
         [SerializeField] private float _hp = 100;
         private bool _isDead = false;
 
-        public Flashlight Flashlight { get; set; }
+        public string Name;
+        public int Health;
+        public bool Visible;
 
         public float Hp
         {
@@ -27,5 +29,7 @@ namespace Shooter.Models
             get => _isDead;
             internal set => _isDead = value;
         }
+
+        public override string ToString() => $"Name: {Name}; Health: {Health}; Visible: {Visible}";
     }
 }
