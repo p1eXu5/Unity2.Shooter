@@ -60,6 +60,7 @@ namespace Shooter.Controllers.Weapons
                 var animEvent = new AnimationEvent() { functionName = nameof( OnReloaded ) };
                 clip.AddEvent( animEvent );
             }
+
         }
 
         protected virtual void Start()
@@ -68,7 +69,9 @@ namespace Shooter.Controllers.Weapons
             _delay = Model.RechargeTime;
             _runningArmo = Model.Magazine;
 
-            //gunshotFlash = Instantiate( gunshotFlash, this.artilleryTube );
+            if ( gunshotFlash ) {
+                gunshotFlash = Instantiate( gunshotFlash, this.artilleryTube );
+            }
         }
 
         #endregion

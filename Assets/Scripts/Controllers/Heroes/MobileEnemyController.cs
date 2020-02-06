@@ -92,7 +92,6 @@ namespace Shooter.Controllers.Heroes
 
             _agent = GetComponent<NavMeshAgent>();
             _agent.updatePosition = true;
-            _agent.updateRotation = true;
 
             _playerPos = GameObject.FindGameObjectWithTag( "Player" ).transform;
 
@@ -176,7 +175,7 @@ namespace Shooter.Controllers.Heroes
 
                 if ( Physics.Raycast( ray, out hit, _shootDistance, _targetMask ))
                 {
-                    if ( hit.collider.tag == "Player" && !shooting )
+                    if ( hit.collider.tag == "Player" && !shooting && !Model.IsDead )
                     {
                         _agent.ResetPath();
                         Move( Vector3.zero );
@@ -304,7 +303,7 @@ namespace Shooter.Controllers.Heroes
 
         private IEnumerator FindTargets( float delay )
         {
-            Debug.Log( "coroutine" );
+            // Debug.Log( "coroutine" );
             while ( true )
             {
                 yield return new WaitForSeconds( _dalay );
