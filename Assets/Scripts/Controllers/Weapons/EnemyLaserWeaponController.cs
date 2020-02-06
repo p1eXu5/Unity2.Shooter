@@ -25,15 +25,13 @@ namespace Shooter.Controllers.Weapons
 
             if ( Physics.Raycast( ray, out var hit, _targetMask )) {
 
-                var collider = hit.collider;
-
                 Debug.Log( hit.collider.name );
 
                 _createHitParticle( hit );
 
-                if ( collider.tag == "Player" ) {
+                if ( hit.collider.tag == "Player" ) {
 
-                    _trySetDamage( collider );
+                    _trySetDamage( hit.collider );
                 }
             }
 
